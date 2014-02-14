@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Island A Music (The Goo Filled Hills)" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
+    <ImportInstrument Path="Waves" Names="Waves.SineWave" />
+    <Channel>
+        <Track Instrument="Waves.SineWave" Tempo="100">
+            So5 1 So6 0.5 Li6 0.5 Re7 0.5 So7 0.5
+            Re5 1 Re6 0.5 Fi6 0.5 La6 0.5 Re7 0.5
+            Ri5 1 Ri6 0.5 So6 0.5 Li6 0.5 Ri7 0.5
+            Re5 1 Re6 0.5 Fi6 0.5 La6 0.5 Re7 0.5
+
+            So7 1 Re7 1 Li6 1
+            Re7 1 La6 1 Fi6 1
+            So5 1 Li5 1 Ri6 1
+            Fi6 1 La6 1 Re7 1
+
+            Ri7 1 Li6 1 So6 1
+            Re7 1 Li6 1 So6 1
+            Re5 1 Re6 1 La6 1
+            Fi6 1 - 2
+        </Track>
+    </Channel>
+</Project>

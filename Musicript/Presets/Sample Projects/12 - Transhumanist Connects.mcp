@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="12 - Transhumanist Connects" Composer="Kyle Gabler" Editor="Mygod">
+    <ImportInstrument Path="Waves" Names="Waves.SquareWave" />
+    <Channel>
+        <Track Instrument="Waves.SquareWave" Tempo="108">
+            Re3 2 Fa3 2 Re3 2 Do3 2 Li2 8
+            La2 2 Do3 2 La2 2 So2 2 Fa2 4
+        </Track>
+    </Channel>
+</Project>

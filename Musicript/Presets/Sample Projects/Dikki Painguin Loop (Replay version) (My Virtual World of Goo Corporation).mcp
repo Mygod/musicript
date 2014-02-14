@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Dikki Painguin Loop (Replay version) (My Virtual World of Goo Corporation)" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
+    <ImportInstrument Path="Waves" Names="Waves.SquareWave" />
+    <Channel>
+        <Track Instrument="Waves.SquareWave" Tempo="140">
+            Fi3 0.25 Si3 0.5 Li3 0.5 Ti3 0.75 Di4 0.25 Ri4 0.75 Mi4 0.25 Fi4 0.5
+            Ti3 0.25 Di4 0.25 Fi4 0.75 Li4 0.25 Ti4 0.75 Di5 0.25 Ri5 0.75 Mi5 0.25 Fi5 0.5
+
+            Si4 0.5 Li4 0.5 Ti4 0.5 Li4 0.5
+            - 0.5 Li4 0.5 Si4 0.5 Mi5 1
+            Ri5 0.5 Mi5 0.5 Di5 0.5
+            Ti4 0.5 Li4 0.5 Ti4 0.5 Ri5 0.5
+            Fi5 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di4 0.25
+            Li4 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi3 0.25
+
+            Si4 0.5 Li4 0.5 Ti4 0.5 Li4 0.5
+            - 0.5 Li4 0.5 Si4 0.5 Mi5 1
+            Ri5 0.5 Mi5 0.5 Di5 0.5
+            Ti4 0.5 Li4 0.5 Ti4 0.5 Ri5 0.5
+            Fi5 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di4 0.25
+            Li4 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi3 0.25
+            Fi5 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di5 0.25 Li4 0.25 Fi4 0.25 Di4 0.25
+            Li4 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi4 0.25 Di4 0.25 Li3 0.25 Fi3 0.25
+
+            Si4 0.25 Ti4 0.25 Li4 0.25 Ti4 0.25 Si4 0.25 Ti4 0.25 Li4 0.25 Ti4 0.25
+            Li4 0.25 Di5 0.25 Ti4 0.25 Di5 0.25 Li4 0.25 Di5 0.25 Ti4 0.25 Di5 0.25
+            Ti4 0.25 Ri5 0.25 Di5 0.25 Ri5 0.25 Ti4 0.25 Ri5 0.25 Di5 0.25 Ri5 0.25
+            Di5 0.25 Mi5 0.25 Ri5 0.25 Mi5 0.25 Di5 0.25 Mi5 0.25 Ri5 0.25 Mi5 0.25
+
+            Ti4 0.25 Fi4 0.25 Mi4 0.25 Fi4 0.5 Fi4 0.25 Mi4 0.25 Fi4 0.25
+            Ti4 0.25 Si4 0.25 Fi4 0.25 Si4 0.5 Si4 0.25 Fi4 0.25 Si4 0.25
+            Di5 0.25 Li4 0.25 Si4 0.25 Li4 0.5 Li4 0.25 Si4 0.25 Li4 0.25
+            Ri5 0.25 Ti4 0.25 Li4 0.25 Ti4 0.5 Ti4 0.25 Li4 0.25 Ti4 0.25
+
+            Si4 0.25 Ti4 0.25 Li4 0.25 Ti4 0.25 Si4 0.25 Ti4 0.25 Li4 0.25 Ti4 0.25
+            Li4 0.25 Di5 0.25 Ti4 0.25 Di5 0.25 Li4 0.25 Di5 0.25 Ti4 0.25 Di5 0.25
+            Ti4 0.25 Ri5 0.5           Mi5 0.25 Ri5 0.25 Mi5 0.25 Di5 0.25 Ri5 0.25
+            Ri5 0.25 Di5 0.25 Li4 0.25 Ti4 0.25 Si4 0.25 Li4 0.25 Fi4 0.25 Si4 0.25
+
+            Ti4 0.25 Fi4 0.25 Mi4 0.25 Fi4 0.5 Fi4 0.25 Mi4 0.25 Fi4 0.25
+            Ti4 0.25 Si4 0.25 Fi4 0.25 Si4 0.5 Si4 0.25 Fi4 0.25 Si4 0.25
+            Di5 0.25 Li4 0.25 Si4 0.25 Li4 0.5 Li4 0.25 Si4 0.25 Li4 0.25
+            Ri5 0.25 Ti4 0.25 Li4 0.25 Ti4 0.5 Ti4 0.25 Li4 0.25 Ti4 0.25
+
+            Si4 1.5 Li4 0.5
+            Ti3 0.5 Ti4 0.5 Di4 0.5 Di5 0.5
+            Ri4 0.5 Ri5 0.5 Mi4 0.5 Mi5 0.5
+            Fi4 0.5 Fi5 0.5 So4 0.5 So5 0.5
+        </Track>
+        <Track Instrument="Waves.SquareWave" Tempo="140" Dynamics="0.5">
+            - 12.5  Li4 0.5 Ti4 0.5
+            - 11    Li4 0.5 Ti4 0.5
+        </Track>
+    </Channel>
+</Project>

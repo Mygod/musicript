@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Ode to the Bridge Builder (Brave Adventurers)" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
+    <ImportInstrument Path="Waves" Names="Waves.SawtoothWave" />
+    <Channel>
+        <Track Instrument="Waves.SawtoothWave" Tempo="110">
+            Do4 1 Do4 1
+
+            Do4 0.5 Re4 0.5
+            Mi4 3 Do4 1
+            So4 3 Mi4 1
+            Do4 3 La3 1
+            Do4 3
+
+            Do4 0.5 Re4 0.5
+            Mi4 3 Do4 1
+            So4 2 Mi4 1 So4 1
+            La4 3 So4 1
+            Mi4 3 Do4 0.5 Re4 0.5
+            Mi4 3 Do4 0.5 Re4 0.5
+            Do4 4
+            - 3
+
+            Do4 0.5 Re4 0.5
+            Mi4 3 Do4 1
+            So4 2 Mi4 1 So4 1
+            La4 2 Do5 1 Re5 1
+            Do5 3 Do4 0.5 Re4 0.5
+            Mi4 3 Do4 0.5 Re4 0.5
+            Do4 4
+            - 3
+
+            <!-- E Major -->
+
+            Mi4 0.5 Fi4 0.5
+            Si4 3 Mi4 1
+            Ti4 3 Si4 1
+            Di5 3 Di4 1
+            Ti4 3
+
+            Mi4 0.5 Fi4 0.5
+            Si4 3 Mi4 1
+            Ti4 2 Si4 1 Ti4 1
+            Di5 3 Ti4 1
+            Si4 3 Mi4 0.5 Fi4 0.5
+            Si4 3 Mi4 0.5 Fi4 0.5
+            Mi4 4
+            - 3
+
+            Mi4 0.5 Fi4 0.5
+            Si4 3 Mi4 1
+            Ti4 2 Si4 1 Ti4 1
+            Di5 2 Mi5 1 Fi5 1
+            Mi5 3 Mi4 0.5 Fi4 0.5
+            Si4 3 Ti4 0.5 Fi4 0.5
+            Mi4 4
+            - 4
+        </Track>
+    </Channel>
+</Project>

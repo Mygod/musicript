@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Hello, MOM" Composer="Kyle Gabler" Editor="Mygod">
+    <ImportInstrument Path="Waves" Names="Waves.TriangleWave" />
+    <Channel>
+        <Track Instrument="Waves.TriangleWave" Tempo="133.3333333333333333333333333333333333333">
+            Gb5 1
+            G 5 1
+            Ab5 1
+            A 5 3.44
+        </Track>
+    </Channel>
+</Project>
