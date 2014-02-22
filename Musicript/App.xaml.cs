@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -11,10 +12,10 @@ namespace Mygod.Musicript
         static App()
         {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-            /*AppDomain.CurrentDomain.SetData("PRIVATE_BINPATH", "Resources\\Libraries");
+            AppDomain.CurrentDomain.SetData("PRIVATE_BINPATH", "Resources\\Libraries");
             var m = typeof(AppDomainSetup).GetMethod("UpdateContextProperty", BindingFlags.NonPublic | BindingFlags.Static);
             var fusion = typeof(AppDomain).GetMethod("GetFusionContext", BindingFlags.NonPublic | BindingFlags.Instance);
-            m.Invoke(null, new[] { fusion.Invoke(AppDomain.CurrentDomain, null), "PRIVATE_BINPATH", "Bin" });*/
+            m.Invoke(null, new[] { fusion.Invoke(AppDomain.CurrentDomain, null), "PRIVATE_BINPATH", "Bin" });
         }
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

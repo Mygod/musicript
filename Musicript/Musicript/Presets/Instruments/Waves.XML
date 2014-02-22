@@ -52,5 +52,29 @@
             <param name="time">当前时刻。（单位：秒）</param>
             <returns>返回范围在 [-1, 1] 之间的样本。</returns>
         </member>
+        <member name="T:Mygod.Musicript.Instruments.Waves.ParabolicWave">
+            <summary>
+            抛物波。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Instruments.Waves.ParabolicWave.Sample(System.Double)">
+            <summary>
+            取样。
+            </summary>
+            <param name="time">当前时刻。（单位：秒）</param>
+            <returns>返回范围在 [-1, 1] 之间的样本。</returns>
+        </member>
+        <member name="T:Mygod.Musicript.Instruments.Waves.SmoothParabolicWave">
+            <summary>
+            平滑抛物波。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Instruments.Waves.SmoothParabolicWave.Sample(System.Double)">
+            <summary>
+            取样。
+            </summary>
+            <param name="time">当前时刻。（单位：秒）</param>
+            <returns>返回范围在 [-1, 1] 之间的样本。</returns>
+        </member>
     </members>
 </doc>

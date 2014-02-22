@@ -11,36 +11,39 @@ using Mygod.Xml.Linq;
 
 namespace Mygod.Musicript
 {
-    public sealed class Instrument
+    public static class Instrument
     {
-        private Instrument(Assembly assembly, string className)
+        public static double Sample(string instrumentName, double time)
         {
-            sample = assembly.GetType("Mygod.Musicript.Instruments." + className)
-                .GetMethod("Sample", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(double) }, null);
+            return (double) Instruments[instrumentName].Invoke(null, new object[] { time });
         }
-
-        public double Sample(double time)
+        private static MethodInfo GetSampleMethod(this IReflect type)
         {
-            return (double) sample.Invoke(null, new object[] { time });
+            return type.GetMethod("Sample", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(double) }, null);
         }
-
-        private readonly MethodInfo sample;
 
         private static readonly Dictionary<string, Assembly> ImportedAssemblies = new Dictionary<string, Assembly>();
-        public static readonly Dictionary<string, Instrument> Instruments = new Dictionary<string, Instrument>();
+        public static readonly Dictionary<string, MethodInfo> Instruments = new Dictionary<string, MethodInfo>();
+
+        private static readonly string Prefix = "Mygod.Musicript.Instruments.";
 
         public static void Import(string path, string classNames, string dir = null)
         {
-            if (string.IsNullOrWhiteSpace(classNames)) return;  // MEH I DON'T EVEN CARE
             string fullPath;
             path += ".dll";
             if (dir == null || !File.Exists(fullPath = Path.Combine(dir, "Instruments", path)))
                 if (!File.Exists(fullPath = Path.Combine(CurrentApp.Directory, "Presets/Instruments", path)))
                     throw new FileNotFoundException();
             var temp = fullPath.ToLowerInvariant();
-            if (!ImportedAssemblies.ContainsKey(temp)) ImportedAssemblies.Add(temp, Assembly.LoadFrom(fullPath));
-            foreach (var className in classNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                Instruments[className] = new Instrument(ImportedAssemblies[temp], className);
+            var asm = Assembly.LoadFrom(fullPath);
+            if (!ImportedAssemblies.ContainsKey(temp)) ImportedAssemblies.Add(temp, asm);
+            var regex = string.IsNullOrWhiteSpace(classNames) ? null : new Regex(classNames, RegexOptions.Compiled);
+            foreach (var type in asm.GetTypes()
+                .Where(type => type.FullName.StartsWith(Prefix) && (regex == null || regex.IsMatch(type.FullName))))
+            {
+                var sample = type.GetSampleMethod();
+                if (sample != null) Instruments[type.FullName.Substring(Prefix.Length)] = sample;
+            }
         }
     }
 
@@ -125,7 +128,7 @@ namespace Mygod.Musicript
         public Track(XElement element)
         {
             currentNoteStartTime = BeginAt = element.GetAttributeValueWithDefault<TimeSpan>("BeginAt").TotalSeconds;
-            Instrument = Instrument.Instruments[element.GetAttributeValue("Instrument")];
+            InstrumentName = element.GetAttributeValue("Instrument");
             Tempo = element.GetAttributeValueWithDefault("Tempo", 60.0);
             Dynamics = element.GetAttributeValueWithDefault("Dynamics", 1.0);
             var sum = 0.0;
@@ -139,7 +142,7 @@ namespace Mygod.Musicript
         }
 
         public readonly double BeginAt, Length;
-        public readonly Instrument Instrument;
+        public readonly string InstrumentName;
         public double Tempo, Dynamics;
 
         private int currentNodeIndex;
@@ -192,7 +195,7 @@ namespace Mygod.Musicript
                 currentNodeIndex++;
             }
             var freq = ((Note) this[currentNodeIndex]).Frequency;
-            return freq < 1e-8 ? 0 : Instrument.Sample((time - currentNoteStartTime) * freq) * Dynamics;
+            return freq < 1e-8 ? 0 : Instrument.Sample(InstrumentName, (time - currentNoteStartTime) * freq) * Dynamics;
         }
     }
     public sealed class Channel : List<Track>

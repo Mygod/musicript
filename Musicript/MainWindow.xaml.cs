@@ -1,6 +1,7 @@
-﻿using System.IO;
-using System.Media;
+﻿using System.Globalization;
+using System.IO;
 using System.Windows;
+using IrrKlang;
 using Mygod.Windows;
 using Mygod.Windows.Dialogs;
 
@@ -8,6 +9,14 @@ namespace Mygod.Musicript
 {
     public sealed partial class MainWindow
     {
+        private sealed class SoundStopEventReceiver : ISoundStopEventReceiver
+        {
+            public void OnSoundStopped(ISound iSound, StopEventCause reason, object userData)
+            {
+                sound = null;
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,7 +29,10 @@ namespace Mygod.Musicript
         };
         private readonly SaveFileDialog wavSaver = new SaveFileDialog { Filter = "波形文件 (*.wav) | *.wav", AddExtension = true };
 
-        private SoundPlayer player;
+        private static readonly ISoundEngine Engine = new ISoundEngine();
+        private static ISound sound;
+        private static int index;
+        private static readonly ISoundStopEventReceiver Receiver = new SoundStopEventReceiver();
 
         private void BrowseProject(object sender, RoutedEventArgs e)
         {
@@ -29,21 +41,20 @@ namespace Mygod.Musicript
 
         private void Play(object sender, RoutedEventArgs e)
         {
-            if (player != null) Stop(sender, e);
+            if (sound != null) Stop(sender, e);
             var proj = new Project(ProjectBox.Text);
-            player = new SoundPlayer(proj.Compile(BitsPerSampleBox.SelectedIndex >= 8
+            sound = Engine.Play2D(Engine.AddSoundSourceFromIOStream(proj.Compile(BitsPerSampleBox.SelectedIndex >= 8
                 ? (BitsPerSampleBox.SelectedIndex - 8) << 2 : (BitsPerSampleBox.SelectedIndex + 1),
-                uint.Parse(SamplingRateBox.Text))) { LoadTimeout = int.MaxValue };
-            if (proj.Looped) player.PlayLooping();
-            else player.Play();
+                uint.Parse(SamplingRateBox.Text)), (++index).ToString(CultureInfo.InvariantCulture)), proj.Looped, false, false);
+            sound.setSoundStopEventReceiver(Receiver);
             StopButton.IsEnabled = true;
         }
 
         private void Stop(object sender, RoutedEventArgs e)
         {
-            player.Stop();
-            player = null;
+            Engine.StopAllSounds();
             StopButton.IsEnabled = false;
+            sound = null;
         }
 
         private void SaveToFile(object sender, RoutedEventArgs e)
