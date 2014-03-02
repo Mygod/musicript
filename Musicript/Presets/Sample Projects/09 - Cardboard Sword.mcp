@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Name="09 - Cardboard Sword" Composer="Kyle Gabler" Editor="Mygod">
-    <ImportInstrument Path="Waves" Names="Waves.SawtoothWave" />
+    <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
     <Channel>
-        <Track Instrument="Waves.SawtoothWave" Tempo="120">
+        <Track Instrument="SawtoothWave" Tempo="120">
             Fi3 0.5 Di4 0.5 Fi4 0.5 Di6 0.5 La6 0.5 Fi6 0.5 Di6 0.5 La5 0.5
             Fi6 0.5 Fi6 0.5 Fi6 0.5 Fi6 0.5 Fa6 0.5 Fa6 0.5 Fa6 0.5 Fa6 0.5
             Fi5 0.5 Fi5 0.5 Fi5 0.5 Fi5 0.5 -   3

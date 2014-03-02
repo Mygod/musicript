@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A09E67B-423E-4164-83EF-7542CF0A9D42}</ProjectGuid>
+    <ProjectGuid>{037D134F-FCDC-4FC8-8A8D-FF808BDC5AEF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mygod.Musicript.Instruments.Waves</RootNamespace>
-    <AssemblyName>Waves</AssemblyName>
+    <RootNamespace>Mygod.Musicript.Interpolators.Inflection</RootNamespace>
+    <AssemblyName>Inflection</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -23,18 +23,18 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Musicript\Presets\Instruments\</OutputPath>
+    <OutputPath>..\Musicript\Presets\Interpolators\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Musicript\Presets\Instruments\Waves.XML</DocumentationFile>
+    <DocumentationFile>..\Musicript\Presets\Interpolators\Inflection.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Waves.cs" />
+    <Compile Include="Inflection.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

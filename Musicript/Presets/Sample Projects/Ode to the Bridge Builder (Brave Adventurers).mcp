@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="Ode to the Bridge Builder (Brave Adventurers)" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
-    <ImportInstrument Path="Waves" Names="Waves.SawtoothWave" />
+<Project Name="Ode to the Bridge Builder (Brave Adventurers)"
+         Composer="Kyle Gabler" Editor="Mygod" Looped="True">
+    <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
     <Channel>
-        <Track Instrument="Waves.SawtoothWave" Tempo="110">
+        <Track Instrument="SawtoothWave" Tempo="110">
             Do4 1 Do4 1
 
             Do4 0.5 Re4 0.5

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Graphic Processing Unit" Composer="Kyle Gabler" Editor="Mygod"
+         Looped="True">
+    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
+                      Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SquareWave"
+                VolumeController="Ding" />
+    <Instrument ID="Strings" Path="Waves" Name="SawtoothWave" />
+    <Instrument ID="Squeak" Path="Waves" Name="SquareWave" />
+    <Interpolator ID="Whew" Path="Inflection" Name="LinearInflection"
+                  Speed="-100" />
+    <Instrument ID="WhewyWave" Path="Waves" Name="SquareWave"
+                Interpolator="Whew" />
+    <Channel>
+        <Track Instrument="DingyWave" Tempo="100" Dynamics="0.5">
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+            Ti5 1 Fi5 1 Re6 1 Di6 1 La5 1 Fi5 1
+        </Track>
+        <Track Instrument="Strings" Tempo="100" Dynamics="0.05">
+            - 6
+            Ti3 6
+            - 3 SD 0.5 Di4 3
+            Re4 1
+        </Track>
+        <Track Instrument="Squeak" Tempo="100" Dynamics="0.05">
+            - 12
+            Fi5 1 Re5 1 Di5 1 Di5 3
+            Re5 1 - 5
+            Fi4 1 So4 1 Ti4 1 La4 3
+            Fi4 3 - 3
+            Re4 3 Di4 3
+            Ti3 6
+        </Track>
+        <Track Instrument="WhewyWave" Tempo="100">
+            - 44 Ti4 6
+            Ti5 2 Mi6 4 Fi6 3
+            So5 4 Fi5 4
+            La5 6
+            La5 6
+            Ti5 3 Do6 5
+            La5 2 La5 3
+            Re6 2 Re6 3
+            Mi6 13
+        </Track>
+    </Channel>
+</Project>

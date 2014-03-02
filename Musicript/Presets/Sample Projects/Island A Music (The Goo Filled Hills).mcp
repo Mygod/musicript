@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="Island A Music (The Goo Filled Hills)" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
-    <ImportInstrument Path="Waves" Names="Waves.SineWave" />
+<Project Name="Island A Music (The Goo Filled Hills)" Composer="Kyle Gabler"
+         Editor="Mygod" Looped="True">
+    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
+                      Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SineWave"
+                VolumeController="Ding" />
     <Channel>
-        <Track Instrument="Waves.SineWave" Tempo="100">
+        <Track Instrument="DingyWave" Tempo="100">
             So5 1 So6 0.5 Li6 0.5 Re7 0.5 So7 0.5
             Re5 1 Re6 0.5 Fi6 0.5 La6 0.5 Re7 0.5
             Ri5 1 Ri6 0.5 So6 0.5 Li6 0.5 Ri7 0.5

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Name="06 - 8 Bit Inferno" Composer="Kyle Gabler" Editor="Mygod">
-    <ImportInstrument Path="Waves" Names="Waves.SawtoothWave" />
+    <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
     <Channel>
-        <Track Instrument="Waves.SawtoothWave" Tempo="150">
-                                                                                                                6b6 0.25 - 0.25
-            6b6 0.25  - 0.75    6b6 0.25 - 0.5 6b6 0.25     6b6 0.25 - 0.25 5 6 0.25 - 0.75                     5 6 0.25 - 0.25
-            7b6 0.25  - 0.75    7b6 0.25 - 0.5 7b6 0.25     7b6 0.25 - 0.25 7b6 0.25 - 0.25     5 6 0.25 - 0.25 4 6 0.25 - 0.25
-            3b6 0.25  - 3.25                                                                                    3b6 0.25 - 0.25
-            3b6 0.25  - 0.75    2 6 0.25 - 0.5 2b6 0.625      - 0.25        6b5 0.375           - 1.1875
-            2b5 0.625 - 0.6875         5 4 0.75               - 1                               1 3 1
-                      - 1              3b3 1                  - 0.8625
+        <Track Instrument="SawtoothWave" Tempo="150">
+                                                                                                        6b6 0.25  - 0.25
+            6b6 0.25  - 0.75    6b6 0.25  - 0.5           6b6 0.25 6b6 0.25  - 0.25    5 6 0.25  - 0.75 5 6 0.25  - 0.25
+            7b6 0.25  - 0.75    7b6 0.25  - 0.5  7b6 0.25          7b6 0.25  - 0.25    7b6 0.25  - 0.25 5 6 0.25  - 0.25
+            4 6 0.25  - 0.25    3b6 0.25  - 3.25                                                        3b6 0.25  - 0.25
+            3b6 0.25  - 0.75    2 6 0.25  - 0.5  2b6 0.625                   - 0.25                     6b5 0.375 - 1.1875
+            2b5 0.625 - 0.6875  5 4 0.75                                     - 1                                  1 3 1
+            - 1                 3b3 1     - 0.8625
         </Track>
     </Channel>
 </Project>

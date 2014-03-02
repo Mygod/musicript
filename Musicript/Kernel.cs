@@ -4,47 +4,130 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Xml.Linq;
 using Mygod.Windows;
+using Mygod.Windows.Dialogs;
 using Mygod.Xml.Linq;
 
 namespace Mygod.Musicript
 {
-    public static class Instrument
+    public static class Helper
     {
-        public static double Sample(string instrumentName, double time)
+        private static readonly HashSet<string> Excluded = new HashSet<string>
+            ("Path,Name,ID,Interpolator,VolumeController"
+                .ToLowerInvariant().Split(','));
+
+        public static void ProcessArguments(this XElement element,
+                                            Type type, object obj)
         {
-            return (double) Instruments[instrumentName].Invoke(null, new object[] { time });
+            foreach (var arg in element.Attributes().Where(attr =>
+                !Excluded.Contains(attr.Name.LocalName.ToLowerInvariant())))
+                type.GetMethod("Set" + arg.Name, BindingFlags.Public
+                               | BindingFlags.Instance, null,
+                               new[] { typeof(string) }, null)
+                    .Invoke(obj, new object[] { arg.Value });
         }
-        private static MethodInfo GetSampleMethod(this IReflect type)
+
+        private static readonly Dictionary<string, Assembly>
+            ImportedAssemblies = new Dictionary<string, Assembly>();
+        public static Type GetType
+            (this XElement element, string dir = null)
         {
-            return type.GetMethod("Sample", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(double) }, null);
-        }
-
-        private static readonly Dictionary<string, Assembly> ImportedAssemblies = new Dictionary<string, Assembly>();
-        public static readonly Dictionary<string, MethodInfo> Instruments = new Dictionary<string, MethodInfo>();
-
-        private static readonly string Prefix = "Mygod.Musicript.Instruments.";
-
-        public static void Import(string path, string classNames, string dir = null)
-        {
-            string fullPath;
+            string path = element.GetAttributeValue("Path"), fullPath,
+                   type = element.Name.LocalName + 's',
+                   name = string.Format("Mygod.Musicript.{0}.{1}.{2}",
+                                        type, path.Replace('/', '.'),
+                                        element.GetAttributeValue("Name"));
             path += ".dll";
-            if (dir == null || !File.Exists(fullPath = Path.Combine(dir, "Instruments", path)))
-                if (!File.Exists(fullPath = Path.Combine(CurrentApp.Directory, "Presets/Instruments", path)))
+            if (dir == null || !File.Exists(
+                fullPath = Path.Combine(dir, type, path)))
+                if (!File.Exists(fullPath = Path.Combine
+                    (CurrentApp.Directory, "Presets", type, path)))
                     throw new FileNotFoundException();
             var temp = fullPath.ToLowerInvariant();
-            var asm = Assembly.LoadFrom(fullPath);
-            if (!ImportedAssemblies.ContainsKey(temp)) ImportedAssemblies.Add(temp, asm);
-            var regex = string.IsNullOrWhiteSpace(classNames) ? null : new Regex(classNames, RegexOptions.Compiled);
-            foreach (var type in asm.GetTypes()
-                .Where(type => type.FullName.StartsWith(Prefix) && (regex == null || regex.IsMatch(type.FullName))))
-            {
-                var sample = type.GetSampleMethod();
-                if (sample != null) Instruments[type.FullName.Substring(Prefix.Length)] = sample;
-            }
+            Assembly assembly;
+            if (ImportedAssemblies.ContainsKey(temp))
+                assembly = ImportedAssemblies[temp];
+            else ImportedAssemblies.Add(temp,
+                    assembly = Assembly.LoadFrom(fullPath));
+            return assembly.GetType(name);
         }
+
+        public static MethodInfo GetInstanceMethod
+            (this Type type, string name, params Type[] arguments)
+        {
+            return type.GetMethod(name, BindingFlags.Public
+                | BindingFlags.Instance, null, arguments, null);
+        }
+    }
+    public sealed class Interpolator
+    {
+        public Interpolator(XElement element, string dir = null)
+        {
+            var type = element.GetType(dir);
+            element.ProcessArguments(type,
+                interpolator = Activator.CreateInstance(type));
+            interpolate = type.GetInstanceMethod("Interpolate",
+                typeof(double), typeof(double));
+        }
+
+        public double Interpolate(double frequency, double time)
+        {
+            return (double)interpolate.Invoke(interpolator,
+                new object[] { frequency, time });
+        }
+
+        private readonly object interpolator;
+        private readonly MethodInfo interpolate;
+    }
+    public sealed class VolumeController
+    {
+        public VolumeController(XElement element, string dir = null)
+        {
+            var type = element.GetType(dir);
+            element.ProcessArguments(type,
+                volumeController = Activator.CreateInstance(type));
+            getVolume = type.GetInstanceMethod("GetVolume", typeof(double));
+        }
+
+        public double GetVolume(double time)
+        {
+            return (double)getVolume.Invoke(volumeController,
+                                            new object[] { time });
+        }
+
+        private readonly object volumeController;
+        private readonly MethodInfo getVolume;
+    }
+    public sealed class Instrument
+    {
+        public Instrument(Project parent, XElement element, string dir = null)
+        {
+            var type = element.GetType(dir);
+            element.ProcessArguments(type,
+                instrument = Activator.CreateInstance(type));
+            sample = type.GetInstanceMethod("Sample", typeof(double));
+            var value = element.GetAttributeValue("Interpolator");
+            if (value != null) interpolator = parent.Interpolators[value];
+            value = element.GetAttributeValue("VolumeController");
+            if (value != null)
+                volumeController = parent.VolumeControllers[value];
+        }
+
+        public double Sample(double frequency, double time)
+        {
+            var result = (double)sample.Invoke(instrument, new object[]
+                { interpolator == null ? frequency * time
+                    : interpolator.Interpolate(frequency, time) });
+            if (volumeController != null)
+                result *= volumeController.GetVolume(time);
+            return result;
+        }
+
+        private readonly object instrument;
+        private readonly MethodInfo sample;
+        private readonly Interpolator interpolator;
+        private readonly VolumeController volumeController;
     }
 
     public abstract class TrackNode
@@ -53,24 +136,28 @@ namespace Mygod.Musicript
         {
             Value = value;
         }
-        protected TrackNode(Match match) : this(match.Groups[8].Value == "-" ? double.NaN : double.Parse(match.Groups[8].Value))
+        protected TrackNode(Match match) : this(match.Groups[8].Value == "-"
+            ? double.NaN : double.Parse(match.Groups[8].Value))
         {
         }
         public double Value;
 
         public static TrackNode Create(Match match)
         {
-            return match.Groups[2].Success ? (TrackNode) new ConfigureNode(match) : new Note(match);
+            return match.Groups[2].Success
+                ? (TrackNode) new ConfigureNode(match) : new Note(match);
         }
     }
     public sealed class Note : TrackNode
     {
         private static readonly int[] NoteMappings = { 0, 2, 4, 5, 7, 9, 11 };
-        private static readonly Dictionary<string, int> SyllableMappings = new Dictionary<string, int>
-        {
-            { "do", 0 }, { "di", 1 }, { "re", 2 }, { "ri", 3 }, { "mi", 4 }, { "fa", 5 },
-            { "fi", 6 }, { "so", 7 }, { "si", 8 }, { "la", 9 }, { "li", 10 }, { "ti", 11 }
-        };
+        private static readonly Dictionary<string, int>
+            SyllableMappings = new Dictionary<string, int>
+            {
+                { "do", 0 }, { "di", 1 }, { "re", 2 }, { "ri", 3 },
+                { "mi", 4 }, { "fa", 5 }, { "fi", 6 }, { "so", 7 },
+                { "si", 8 }, { "la", 9 }, { "li", 10 }, { "ti", 11 }
+            };
 
         public Note(double frequency, double length) : base(length)
         {
@@ -79,14 +166,16 @@ namespace Mygod.Musicript
         public Note(Match match) : base(match)
         {
             if (match.Groups[1].Value == "-") Frequency = 0;
-            else if (match.Groups[3].Success) Frequency = double.Parse(match.Groups[3].Value);
+            else if (match.Groups[3].Success)
+                Frequency = double.Parse(match.Groups[3].Value);
             else
             {
                 int height;
                 if (match.Groups[5].Success)
                 {
                     var ch = match.Groups[5].Value[0];
-                    height = NoteMappings[(ch + 7 - (ch <= '7' ? '1' : 'c')) % 7];
+                    height = NoteMappings
+                        [(ch + 7 - (ch <= '7' ? '1' : 'c')) % 7];
                     foreach (var c in match.Groups[6].Value)
                         switch (c)
                         {
@@ -123,16 +212,23 @@ namespace Mygod.Musicript
     public sealed class Track : List<TrackNode>
     {
         private static readonly Regex NoteMatcher = new Regex(
-            @"((sd|st)|f([0-9.]+)|-|(do|di|re|ri|mi|fa|fi|so|si|la|li|ti|([a-g1-7])\s*([#b]*))\s*([+-]?\s*\d+))\s*(-|[0-9.]+)",
+            @"((sd|st)|f([0-9.]+)|-|(do|di|re|ri|mi|fa|fi|so|si|la|li|ti|" +
+            @"([a-g1-7])\s*([#b]*))\s*([+-]?\s*\d+))\s*(-|[0-9.]+)",
             RegexOptions.Compiled | RegexOptions.Singleline);
-        public Track(XElement element)
+        public Track(Project project, XElement element)
         {
-            currentNoteStartTime = BeginAt = element.GetAttributeValueWithDefault<TimeSpan>("BeginAt").TotalSeconds;
-            InstrumentName = element.GetAttributeValue("Instrument");
+            this.project = project;
+            currentNoteStartTime = BeginAt = element
+                .GetAttributeValueWithDefault<TimeSpan>("BeginAt")
+                .TotalSeconds;
+            InstrumentID = element.GetAttributeValue("Instrument");
             Tempo = element.GetAttributeValueWithDefault("Tempo", 60.0);
             Dynamics = element.GetAttributeValueWithDefault("Dynamics", 1.0);
             var sum = 0.0;
-            foreach (var node in from Match match in NoteMatcher.Matches(element.Value.ToLower()) select TrackNode.Create(match))
+            foreach (var node in
+                from Match match
+                    in NoteMatcher.Matches(element.Value.ToLower())
+                select TrackNode.Create(match))
             {
                 Add(node);
                 var note = node as Note;
@@ -142,11 +238,12 @@ namespace Mygod.Musicript
         }
 
         public readonly double BeginAt, Length;
-        public readonly string InstrumentName;
+        public readonly string InstrumentID;
         public double Tempo, Dynamics;
 
         private int currentNodeIndex;
         private double currentNoteStartTime;
+        private Project project;
 
         public double Update(double time)
         {
@@ -178,7 +275,8 @@ namespace Mygod.Musicript
             {
                 var node = this[currentNodeIndex];
                 var note = node as Note;
-                if (note != null) currentNoteStartTime += 60 * note.Length / tempo;
+                if (note != null)
+                    currentNoteStartTime += 60 * note.Length / tempo;
                 else
                 {
                     var cn = (ConfigureNode) node;
@@ -195,16 +293,19 @@ namespace Mygod.Musicript
                 currentNodeIndex++;
             }
             var freq = ((Note) this[currentNodeIndex]).Frequency;
-            return freq < 1e-8 ? 0 : Instrument.Sample(InstrumentName, (time - currentNoteStartTime) * freq) * Dynamics;
+            return freq < 1e-8 ? 0
+                : project.Instruments[InstrumentID]
+                    .Sample(freq, time - currentNoteStartTime) * Dynamics;
         }
     }
     public sealed class Channel : List<Track>
     {
         public readonly double Length;
 
-        public Channel(XElement element)
+        public Channel(Project project, XContainer element)
         {
-            foreach (var track in element.Elements("Track").Select(e => new Track(e)))
+            foreach (var track in element.Elements("Track")
+                                         .Select(e => new Track(project, e)))
             {
                 Add(track);
                 var length = track.BeginAt + track.Length;
@@ -227,9 +328,17 @@ namespace Mygod.Musicript
             Composer = root.GetAttributeValue("Composer");
             Editor = root.GetAttributeValue("Editor");
             Looped = root.GetAttributeValueWithDefault<bool>("Looped");
-            foreach (var import in root.Elements("ImportInstrument"))
-                Instrument.Import(import.GetAttributeValue("Path"), import.GetAttributeValue("Names"), dir);
-            foreach (var channel in root.Elements("Channel").Select(element => new Channel(element)))
+            foreach (var e in root.Elements("Interpolator"))
+                Interpolators.Add(e.GetAttributeValue("ID"),
+                    new Interpolator(e, dir));
+            foreach (var e in root.Elements("VolumeController"))
+                VolumeControllers.Add(e.GetAttributeValue("ID"),
+                    new VolumeController(e, dir));
+            foreach (var e in root.Elements("Instrument"))
+                Instruments.Add(e.GetAttributeValue("ID"),
+                    new Instrument(this, e, dir));
+            foreach (var channel in root.Elements("Channel")
+                .Select(element => new Channel(this, element)))
             {
                 Add(channel);
                 if (Length < channel.Length) Length = channel.Length;
@@ -239,8 +348,15 @@ namespace Mygod.Musicript
         public readonly double Length;
         public readonly string Name, Composer, Editor;
         public readonly bool Looped;
+        public readonly Dictionary<string, Instrument>
+            Instruments = new Dictionary<string, Instrument>();
+        public readonly Dictionary<string, Interpolator>
+            Interpolators = new Dictionary<string, Interpolator>();
+        public readonly Dictionary<string, VolumeController>
+            VolumeControllers = new Dictionary<string, VolumeController>();
 
-        public Stream Compile(int bytesPerSample = 2, uint samplesPerSecond = 44100)
+        public Stream Compile(int bytesPerSample = 2,
+                              uint samplesPerSecond = 44100)
         {
             return new ProjectWavStream(this, bytesPerSample, samplesPerSecond);
         }
@@ -254,7 +370,8 @@ namespace Mygod.Musicript
 
     internal sealed class ProjectWavStream : Stream
     {
-        internal ProjectWavStream(Project project, int bytesPerSample = 2, uint samplesPerSecond = 44100)
+        internal ProjectWavStream(Project project, int bytesPerSample = 2,
+                                  uint samplesPerSecond = 44100)
         {
             if ((this.bytesPerSample = bytesPerSample) < 0)
             {
@@ -262,27 +379,36 @@ namespace Mygod.Musicript
                 header[20] = 3;
             }
             else actualBytesPerSample = bytesPerSample;
-            if (project.Count > 65535) throw new FormatException("声道数不能超过 65535！");
-            if (project.Count * actualBytesPerSample > 65535) throw new FormatException("声道数/位深度过大！");
+            if (project.Count > 65535)
+                throw new FormatException("声道数不能超过 65535！");
+            if (project.Count * actualBytesPerSample > 65535)
+                throw new FormatException("声道数/位深度过大！");
             var frameSize = (ushort)(project.Count * actualBytesPerSample);
-            if ((long)samplesPerSecond * frameSize > 4294967295) throw new FormatException("声道数/位深度/取样率过大！");
-            var dataChunkSize = (long) Math.Ceiling(samplesPerSecond * project.Length) * frameSize;
+            if ((long)samplesPerSecond * frameSize > 4294967295)
+                throw new FormatException("声道数/位深度/取样率过大！");
+            var dataChunkSize = (long)
+                Math.Ceiling(samplesPerSecond * project.Length) * frameSize;
             length = dataChunkSize + 36;
             if (length > 4294967295)
             {
-                MessageBox.Show("声道数/位深度/取样率/音乐长度过大使得音乐长度超出了 4G！部分音乐会被截断。",
-                                "警告", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                TaskDialog.Show(null, "部分音乐将会被截断。", "原因：声道数/" +
+                                "位深度/取样率/音乐长度过大使得音乐长度超出了 " +
+                                "4G！", TaskDialogType.Warning);
                 dataChunkSize = 4294967259 / frameSize * frameSize;
                 length = dataChunkSize + 36;
             }
             Array.Copy(BitConverter.GetBytes((uint) length), 0, header, 4, 4);
             length += 8;
-            Array.Copy(BitConverter.GetBytes((ushort)((this.project = project).Count)), 0, header, 22, 2);
+            Array.Copy(BitConverter.GetBytes((ushort)
+                ((this.project = project).Count)), 0, header, 22, 2);
             Array.Copy(BitConverter.GetBytes(this.samplesPerSecond = samplesPerSecond), 0, header, 24, 4);
-            Array.Copy(BitConverter.GetBytes((uint) ((long) samplesPerSecond * frameSize)), 0, header, 28, 4);
+            Array.Copy(BitConverter.GetBytes((uint)
+                ((long) samplesPerSecond * frameSize)), 0, header, 28, 4);
             Array.Copy(BitConverter.GetBytes(frameSize), 0, header, 32, 2);
-            Array.Copy(BitConverter.GetBytes((ushort)(bytesPerSample << 3)), 0, header, 34, 2);
-            Array.Copy(BitConverter.GetBytes((uint)dataChunkSize), 0, header, 40, 4);
+            Array.Copy(BitConverter.GetBytes((ushort)(bytesPerSample << 3)),
+                       0, header, 34, 2);
+            Array.Copy(BitConverter.GetBytes((uint)dataChunkSize),
+                       0, header, 40, 4);
         }
 
         private readonly Project project;
@@ -340,12 +466,17 @@ namespace Mygod.Musicript
                 {
                     var up = 1L << ((bytesPerSample << 3) - 1);
                     var val = Math.Round(k * (up - 1));
-                    last = BitConverter.GetBytes(bytesPerSample == 1 ? (long) val + 128
-                        : val >= 0 || bytesPerSample >= 8 ? (long) val : up + up + 1 - (long) -val);
+                    last = BitConverter.GetBytes(bytesPerSample == 1
+                        ? (long) val + 128
+                        : val >= 0 || bytesPerSample >= 8
+                            ? (long) val : up + up + 1 - (long) -val);
                 }
-                else if (bytesPerSample == -4) last = BitConverter.GetBytes((float) k);
-                else if (bytesPerSample == -8) last = BitConverter.GetBytes(k);
-                else throw new NotSupportedException("未知的 bytesPerSample！");
+                else if (bytesPerSample == -4)
+                    last = BitConverter.GetBytes((float) k);
+                else if (bytesPerSample == -8)
+                    last = BitConverter.GetBytes(k);
+                else throw new NotSupportedException
+                                ("未知的 bytesPerSample！");
                 j = actualBytesPerSample;
                 if (j > count) j = count;
                 Array.Copy(last, 0, buffer, offset, j);
@@ -377,6 +508,10 @@ namespace Mygod.Musicript
         public override bool CanSeek { get { return false; } }
         public override bool CanWrite { get { return false; } }
         public override long Length { get { return length; } }
-        public override long Position { get { return position; } set { throw new NotSupportedException(); } }
+        public override long Position
+        {
+            get { return position; }
+            set { throw new NotSupportedException(); }
+        }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using IrrKlang;
+using Mygod.Net;
 using Mygod.Windows;
 using Mygod.Windows.Dialogs;
 
@@ -11,7 +13,8 @@ namespace Mygod.Musicript
     {
         private sealed class SoundStopEventReceiver : ISoundStopEventReceiver
         {
-            public void OnSoundStopped(ISound iSound, StopEventCause reason, object userData)
+            public void OnSoundStopped(ISound iSound, StopEventCause reason,
+                                       object userData)
             {
                 sound = null;
             }
@@ -24,28 +27,36 @@ namespace Mygod.Musicript
 
         private readonly OpenFileDialog projectPicker = new OpenFileDialog
         {
-            InitialDirectory = Path.Combine(CurrentApp.Directory, "Presets", "Sample Projects"),
+            InitialDirectory = Path.Combine(CurrentApp.Directory, "Presets",
+                                            "Sample Projects"),
             Filter = "Musicript 工程 (*.mcp)|*.mcp"
         };
-        private readonly SaveFileDialog wavSaver = new SaveFileDialog { Filter = "波形文件 (*.wav) | *.wav", AddExtension = true };
+        private readonly SaveFileDialog wavSaver = new SaveFileDialog
+                { Filter = "波形文件 (*.wav) | *.wav", AddExtension = true };
 
         private static readonly ISoundEngine Engine = new ISoundEngine();
         private static ISound sound;
         private static int index;
-        private static readonly ISoundStopEventReceiver Receiver = new SoundStopEventReceiver();
+        private static readonly ISoundStopEventReceiver
+            Receiver = new SoundStopEventReceiver();
 
         private void BrowseProject(object sender, RoutedEventArgs e)
         {
-            if (projectPicker.ShowDialog(this) == true) ProjectBox.Text = projectPicker.FileName;
+            if (projectPicker.ShowDialog(this) == true)
+                ProjectBox.Text = projectPicker.FileName;
         }
 
         private void Play(object sender, RoutedEventArgs e)
         {
             if (sound != null) Stop(sender, e);
             var proj = new Project(ProjectBox.Text);
-            sound = Engine.Play2D(Engine.AddSoundSourceFromIOStream(proj.Compile(BitsPerSampleBox.SelectedIndex >= 8
-                ? (BitsPerSampleBox.SelectedIndex - 8) << 2 : (BitsPerSampleBox.SelectedIndex + 1),
-                uint.Parse(SamplingRateBox.Text)), (++index).ToString(CultureInfo.InvariantCulture)), proj.Looped, false, false);
+            sound = Engine.Play2D(Engine.AddSoundSourceFromIOStream(
+                proj.Compile(BitsPerSampleBox.SelectedIndex >= 8
+                    ? (BitsPerSampleBox.SelectedIndex - 8) << 2
+                    : (BitsPerSampleBox.SelectedIndex + 1),
+                uint.Parse(SamplingRateBox.Text)),
+                (++index).ToString(CultureInfo.InvariantCulture)),
+                proj.Looped, false, false);
             sound.setSoundStopEventReceiver(Receiver);
             StopButton.IsEnabled = true;
         }
@@ -59,13 +70,33 @@ namespace Mygod.Musicript
 
         private void SaveToFile(object sender, RoutedEventArgs e)
         {
-            wavSaver.FileName = Path.GetFileNameWithoutExtension(ProjectBox.Text) + ".wav";
+            wavSaver.FileName =
+                Path.GetFileNameWithoutExtension(ProjectBox.Text) + ".wav";
             if (wavSaver.ShowDialog(this) != true) return;
             var proj = new Project(ProjectBox.Text);
-            using (var input = proj.Compile(BitsPerSampleBox.SelectedIndex >= 8 ? (BitsPerSampleBox.SelectedIndex - 7) << 2
-                                                : (BitsPerSampleBox.SelectedIndex + 1), uint.Parse(SamplingRateBox.Text)))
-            using (var output = new FileStream(wavSaver.FileName, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (var input = proj.Compile(
+                BitsPerSampleBox.SelectedIndex >= 8
+                    ? (BitsPerSampleBox.SelectedIndex - 7) << 2
+                    : (BitsPerSampleBox.SelectedIndex + 1),
+                uint.Parse(SamplingRateBox.Text)))
+            using (var output = new FileStream(wavSaver.FileName,
+                FileMode.Create, FileAccess.Write, FileShare.Read))
                 input.CopyTo(output);
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://mygod.tk/product/musicript/");
+        }
+
+        private void CheckForUpdates(object sender, RoutedEventArgs e)
+        {
+            WebsiteManager.CheckForUpdates(218,
+                () => TaskDialog.Show(this, "没有可用的更新。",
+                    type: TaskDialogType.Information),
+                exc => TaskDialog.Show(this, "检查更新失败。",
+                    type: TaskDialogType.Error,
+                    expandedInfo: exc.GetMessage()));
         }
     }
 }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A09E67B-423E-4164-83EF-7542CF0A9D42}</ProjectGuid>
+    <ProjectGuid>{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mygod.Musicript.Instruments.Waves</RootNamespace>
-    <AssemblyName>Waves</AssemblyName>
+    <RootNamespace>Mygod.Musicript.VolumeControllers.Faders</RootNamespace>
+    <AssemblyName>Faders</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -23,18 +23,18 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Musicript\Presets\Instruments\</OutputPath>
+    <OutputPath>..\Musicript\Presets\VolumeControllers\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Musicript\Presets\Instruments\Waves.XML</DocumentationFile>
+    <DocumentationFile>..\Musicript\Presets\VolumeControllers\Faders.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Waves.cs" />
+    <Compile Include="Faders.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

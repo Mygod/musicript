@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="22 - Tomorrow Corporation, the Future is Tomorrow!" Composer="Kyle Gabler" Editor="Mygod">
-    <ImportInstrument Path="Waves" Names="Waves.SawtoothWave" />
+<Project Name="22 - Tomorrow Corporation, the Future is Tomorrow!"
+         Composer="Kyle Gabler" Editor="Mygod">
+    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
+                      Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SquareWave"
+                VolumeController="Ding" />
+    <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
     <Channel>
-        <Track Instrument="Waves.SawtoothWave" Tempo="120" Dynamics="0.1">
-            Ti4 0.375 Fa5 0.75 Ti5 0.75 - 0.625
-            SD 1 Do5 4 - 2.3025
+        <Track Instrument="DingyWave" Tempo="120" Dynamics="0.5">
+            Ti5 0.375 Fa6 0.75 Ti6 0.75
         </Track>
-        <Track Instrument="Waves.SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
+        <Track Instrument="SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
+            Do5 4
+        </Track>
+        <Track Instrument="SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
             Do4 4
         </Track>
-        <Track Instrument="Waves.SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
+        <Track Instrument="SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
             Mi4 4
         </Track>
-        <Track Instrument="Waves.SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
+        <Track Instrument="SawtoothWave" Tempo="120" BeginAt="0:00:01.25">
             So4 4
         </Track>
     </Channel>

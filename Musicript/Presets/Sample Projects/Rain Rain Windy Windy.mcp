@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="Rain Rain Windy Windy" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
-    <ImportInstrument Path="Waves" Names="Waves.SineWave" />
+<Project Name="Rain Rain Windy Windy" Composer="Kyle Gabler" Editor="Mygod"
+         Looped="True">
+    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
+                      Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SineWave"
+                VolumeController="Ding" />
+    <Instrument ID="SineWave" Path="Waves" Name="SineWave" />
     <Channel>
-        <Track Instrument="Waves.SineWave" Tempo="110">
+        <Track Instrument="DingyWave" Tempo="110">
             SD 1 La7 0.5 SD 0.5 Mi7 0.5 SD 0.1 Do7 0.5 La6 0.5 Mi6 0.5 Do6 0.5
             SD 1 Ti7 0.5 SD 0.5 Si7 0.5 SD 0.1 Mi7 0.5 Ti6 0.5 Si6 0.5 Mi6 0.5 
             SD 1 La7 0.5 SD 0.5 Fa7 0.5 SD 0.1 Do7 0.5 La6 0.5 Fa6 0.5 Do6 0.5
@@ -18,11 +23,7 @@
             SD 1 Di8 0.5 SD 0.5 La7 0.5 SD 0.1 Mi7 0.5 Di7 0.5 La6 0.5 Mi6 0.5
             SD 1 Do8 0.5 SD 0.5 Si7 0.5 SD 0.1 Ri7 0.5 Do7 0.5 Si6 0.5 Ri6 0.5
 
-            SD 0.5
-            La6 1.5 Mi6 1.5 Fi6 1 Mi6 0.5 Ri6 1 Mi6 0.5
-            Di6 1.5 Si6 3 - 1.5
-            La6 1.5 Mi6 1.5 Fi6 1 Mi6 0.5 Ri6 1 Mi6 0.5
-            Di6 6
+            - 24
 
             SD 1 Di8 0.5 SD 0.5 Si7 0.5 SD 0.1 Mi7 0.5 Di7 0.5 Si6 0.5 Mi6 0.5
             SD 1 Ri8 0.5 SD 0.5 Do8 0.5 SD 0.1 Si7 0.5 Ri7 0.5 Do7 0.5 Si6 0.5
@@ -34,12 +35,23 @@
             SD 1 Ri8 0.5 SD 0.5 Ti7 0.5 SD 0.1 Fi7 0.5 Ri7 0.5 Ti6 0.5 Fi6 0.5
             SD 1 Re8 0.5 SD 0.5 Li7 0.5 SD 0.1 Fa7 0.5 Re7 0.5 Li6 0.5 Fa6 0.5
 
-            SD 0.5
+            SD 0.5 - 18
+            Di8 0.5 Do8 0.5 Ti7 0.5 Li7 0.5 La7 0.5 Si7 0.5
+            So7 0.5 Fi7 0.5 Fa7 0.5 Mi7 0.5 Ri7 0.5 Re7 0.5
+        </Track>
+        <Track Instrument="SineWave" Tempo="110" Dynamics="0.5">
+            - 36
+
+            La6 1.5 Mi6 1.5 Fi6 1 Mi6 0.5 Ri6 1 Mi6 0.5
+            Di6 1.5 Si6 3 - 1.5
+            La6 1.5 Mi6 1.5 Fi6 1 Mi6 0.5 Ri6 1 Mi6 0.5
+            Di6 6
+
+            - 24
+
             Ri7 1.5 Ti6 1.5 Di7 1.5 Li6 1.5
             Si6 1.5 Mi7 1.5 Ri7 3
             Ri6 1.5 Ti5 1.5 Di6 1.5 Li5 1.5
-            Di8 0.5 Do8 0.5 Ti7 0.5 Li7 0.5 La7 0.5 Si7 0.5
-            So7 0.5 Fi7 0.5 Fa7 0.5 Mi7 0.5 Ri7 0.5 Re7 0.5
         </Track>
     </Channel>
 </Project>
