@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mygod.Musicript.VolumeControllers.Faders</RootNamespace>
+    <RootNamespace>Mygod.Musicript.Volumers.Faders</RootNamespace>
     <AssemblyName>Faders</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -23,11 +23,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Musicript\Presets\VolumeControllers\</OutputPath>
+    <OutputPath>..\Musicript\Presets\Volumers\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Musicript\Presets\VolumeControllers\Faders.XML</DocumentationFile>
+    <DocumentationFile>..\Musicript\Presets\Volumers\Faders.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

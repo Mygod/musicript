@@ -157,6 +157,9 @@
     <None Include="Presets\Sample Projects\Rain Rain Windy Windy.mcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Presets\Sample Projects\The Moist Tango.mcp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Presets\Sample Projects\Threadcutter.mcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -177,26 +180,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Presets\Interpolators\Inflection.dll">
+    <None Include="Presets\Pitchers\Oscillators.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Presets\Interpolators\Inflection.pdb">
+    <None Include="Presets\Pitchers\Oscillators.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Presets\Interpolators\Inflection.XML">
+    <None Include="Presets\Pitchers\Oscillators.XML">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Presets\VolumeControllers\Faders.dll">
+    <None Include="Presets\Pitchers\Inflection.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Presets\VolumeControllers\Faders.pdb">
+    <None Include="Presets\Pitchers\Inflection.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Presets\VolumeControllers\Faders.XML">
+    <None Include="Presets\Pitchers\Inflection.XML">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Presets\Volumers\Faders.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Presets\Volumers\Faders.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Presets\Volumers\Faders.XML">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

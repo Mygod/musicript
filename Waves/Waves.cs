@@ -68,6 +68,22 @@ namespace Mygod.Musicript.Instruments.Waves
         }
     }
     /// <summary>
+    /// 弹跳正弦波。
+    /// </summary>
+    public sealed class BouncySineWave
+    {
+        /// <summary>
+        /// 取样。
+        /// </summary>
+        /// <param name="time">当前时刻。（单位：秒）</param>
+        /// <returns>返回范围在 [-1, 1] 之间的样本。</returns>
+        public double Sample(double time)
+        {
+            time = Math.Abs(Math.Sin(2 * Math.PI * time));
+            return time + time - 1;
+        }
+    }
+    /// <summary>
     /// 抛物波。
     /// </summary>
     public sealed class ParabolicWave

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Faders</name>
+    </assembly>
+    <members>
+        <member name="T:Mygod.Musicript.Volumers.Faders.LinearFader">
+            <summary>
+            线性衰减器。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Volumers.Faders.LinearFader.SetSpeed(System.String)">
+            <summary>
+            设置衰减速度。
+            </summary>
+            <param name="value">衰减速度。</param>
+        </member>
+        <member name="M:Mygod.Musicript.Volumers.Faders.LinearFader.GetVolume(System.Double)">
+            <summary>
+            控制指定时刻的音量。
+            </summary>
+            <param name="time">时刻。</param>
+            <returns>指定时刻的音量。</returns>
+        </member>
+        <member name="T:Mygod.Musicript.Volumers.Faders.LogarithmicFader">
+            <summary>
+            对数衰减器。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Volumers.Faders.LogarithmicFader.SetSpeed(System.String)">
+            <summary>
+            设置衰减速度。
+            </summary>
+            <param name="value">衰减速度。</param>
+        </member>
+        <member name="M:Mygod.Musicript.Volumers.Faders.LogarithmicFader.GetVolume(System.Double)">
+            <summary>
+            控制指定时刻的音量。
+            </summary>
+            <param name="time">时刻。</param>
+            <returns>指定时刻的音量。</returns>
+        </member>
+    </members>
+</doc>

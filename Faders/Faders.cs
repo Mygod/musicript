@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mygod.Musicript.VolumeControllers.Faders
+namespace Mygod.Musicript.Volumers.Faders
 {
     /// <summary>
     /// 线性衰减器。

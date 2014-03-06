@@ -1,11 +1,11 @@
-﻿<Window x:Class="Mygod.Musicript.MainWindow"
+﻿<Window x:Class="Mygod.Musicript.MainWindow" SizeToContent="WidthAndHeight"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:m="http://schemas.mygodstudio.tk/wpf" Width="400"
-        Title="{x:Static m:CurrentApp.Title}" ResizeMode="NoResize"
-        Icon="{x:Static m:CurrentApp.MainIcon}" SizeToContent="Height">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+        ResizeMode="CanMinimize" Title="{x:Static m:CurrentApp.Title}" Icon="{x:Static m:CurrentApp.MainIcon}">
     <Grid Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -17,16 +17,11 @@
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Content="_Musicript 项目文件："
-               Target="{Binding ElementName=ProjectBox}" />
-        <TextBox Name="ProjectBox" x:FieldModifier="private"
-                 Grid.Column="1" VerticalAlignment="Center" />
-        <Button Content="浏览(_B)..." Click="BrowseProject"
-                Grid.Column="3" VerticalAlignment="Center" />
-        <Label Content="位深度：(_P)"
-               Target="{Binding ElementName=BitsPerSampleBox}" Grid.Row="1" />
-        <ComboBox Name="BitsPerSampleBox" x:FieldModifier="private"
-                  SelectedIndex="1" Grid.Row="1" Grid.Column="1"
+        <Label Content="_Musicript 项目文件：" Target="{Binding ElementName=ProjectBox}" />
+        <TextBox Name="ProjectBox" x:FieldModifier="private" Grid.Column="1" VerticalAlignment="Center" />
+        <Button Content="浏览(_B)..." Click="BrowseProject" Grid.Column="3" VerticalAlignment="Center" />
+        <Label Content="位深度：(_P)" Target="{Binding ElementName=BitsPerSampleBox}" Grid.Row="1" />
+        <ComboBox Name="BitsPerSampleBox" x:FieldModifier="private" SelectedIndex="1" Grid.Row="1" Grid.Column="1"
                   Grid.ColumnSpan="3" VerticalAlignment="Center">
             <ComboBoxItem Content="8 位" />
             <ComboBoxItem Content="16 位" />
@@ -39,25 +34,23 @@
             <ComboBoxItem Content="32 位 (浮点)" />
             <ComboBoxItem Content="64 位 (浮点)" />
         </ComboBox>
-        <Label Content="采样率：(_R)"
-               Target="{Binding ElementName=SamplingRateBox}" Grid.Row="2" />
-        <m:IntegerUpDown Name="SamplingRateBox" x:FieldModifier="private"
-                         Value="44100" Minimum="0" Maximum="4294967295"
-                         Grid.Row="2" Grid.Column="1"
-                         VerticalAlignment="Center" />
-        <TextBlock Text="Hz" Grid.Row="2" Grid.Column="3"
-                   VerticalAlignment="Center" />
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+        <Label Content="采样率：(_R)" Target="{Binding ElementName=SamplingRateBox}" Grid.Row="2" />
+        <m:IntegerUpDown Name="SamplingRateBox" x:FieldModifier="private" Value="44100" Minimum="0"
+                         Maximum="4294967295" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBlock Text="Hz" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="播放" IsDefault="True" Click="Play" />
-            <Button Name="StopButton" x:FieldModifier="private" Content="停止"
-                    IsEnabled="False" IsCancel="True" Margin="4,0,0,0"
-                    Click="Stop" />
-            <Button Content="输出到文件(_W)..." Click="SaveToFile"
-                    Margin="4,0,0,0" />
+            <Button Name="StopButton" x:FieldModifier="private" Content="停止" IsEnabled="False" IsCancel="True"
+                    Margin="4,0,0,0" Click="Stop" />
+            <Button Content="输出到文件(_W)..." Click="SaveToFile" Margin="4,0,0,0" />
             <Button Content="帮助(_H)" Click="Help" Margin="4,0,0,0" />
-            <Button Content="检查更新(_U)" Click="CheckForUpdates"
-                    Margin="4,0,0,0" />
+            <Button Content="检查更新(_U)" Click="CheckForUpdates" Margin="4,0,0,0" />
         </StackPanel>
+        <Label Grid.Row="4" Content="歌曲信息：" />
+        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                   Name="DetailsText" x:FieldModifier="private" Text="(加载项目并编译以查看)" />
+        <Label Grid.Row="5" Content="溢出次数：" />
+        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                   Name="OverflowText" x:FieldModifier="private" Text="(加载项目并编译以查看)" />
     </Grid>
 </Window>

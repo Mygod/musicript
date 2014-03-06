@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Oscillators</name>
+    </assembly>
+    <members>
+        <member name="T:Mygod.Musicript.Pitchers.Oscillators.LinearSineWaveOscillator">
+            <summary>
+            线性正弦波振荡。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Oscillators.LinearSineWaveOscillator.SetFrequency(System.String)">
+            <summary>
+            设置振频。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Oscillators.LinearSineWaveOscillator.SetAmplitude(System.String)">
+            <summary>
+            设置振幅。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Oscillators.LinearSineWaveOscillator.Pitch(System.Double,System.Double)">
+            <summary>
+            变调。
+            </summary>
+            <param name="frequency">原频率。</param>
+            <param name="time">时刻。</param>
+            <returns>变调后映射到的时刻。</returns>
+        </member>
+    </members>
+</doc>

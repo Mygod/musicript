@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="22 - Tomorrow Corporation, the Future is Tomorrow!"
-         Composer="Kyle Gabler" Editor="Mygod">
-    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
-                      Speed="10" />
-    <Instrument ID="DingyWave" Path="Waves" Name="SquareWave"
-                VolumeController="Ding" />
+<Project Name="22 - Tomorrow Corporation, the Future is Tomorrow!" Composer="Kyle Gabler" Editor="Mygod">
+    <Volumer ID="Ding" Path="Faders" Name="LogarithmicFader" Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SquareWave" Volumer="Ding" />
     <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
     <Channel>
         <Track Instrument="DingyWave" Tempo="120" Dynamics="0.5">

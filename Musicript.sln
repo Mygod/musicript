@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inflection", "Inflection\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faders", "Faders\Faders.csproj", "{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oscillators", "Oscillators\Oscillators.csproj", "{1B205A8F-2FBD-4BD5-8744-853B71C94C19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,16 @@ Global
 		{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{330A8B06-12C6-482C-8AA3-AD9A4C4BA77B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B205A8F-2FBD-4BD5-8744-853B71C94C19}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

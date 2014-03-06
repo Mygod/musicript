@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="The Moist Tango" Composer="Gene M. Rozenberg" Editor="Mygod" Looped="True">
+    <Pitcher ID="Screw" Path="Oscillators" Name="LinearSineWaveOscillator" Frequency="10" Amplitude="15" />
+    <Instrument ID="ScrewyWave" Path="Waves" Name="TriangleWave" Pitcher="Screw" />
+    <Instrument ID="SawtoothWave" Path="Waves" Name="SawtoothWave" />
+    <Channel>
+        <Track Instrument="ScrewyWave" Tempo="120">
+            - 2 Mi5 2
+            Do6 5 - 1 La5 2
+            Si5 5 - 1 Mi5 2
+            Re6 5 - 1 Ti5 1.5 Ti5 0.5
+            Do6 5 - 1 Mi5 1.5 Di6 0.25 Re6 0.25
+            Mi6 5 - 1 So6 5
+            Fi6 1 Fa6 1 - 0.5 Fa6 0.5 Fa6 1 Ri6 1
+            Mi6 3 Re6 0.5 Do6 0.5 Ti5 2.5 Mi5 0.5 Fi5 0.5 Si5 0.5
+            La5 5
+            
+            - 5.5  Mi5 0.5 Do6 0.125 Re6 0.125 Mi6 4.75
+            - 10.5 Mi5 0.5 Ti5 0.125 Do6 0.125 Re6 4.75
+            - 10.5 Mi5 0.5 Do6 0.125 Re6 0.125 Mi6 4.75
+            - 2.5  Re6 0.5 La5 0.125 So5 0.125 Fa5 0.75
+            - 16
+            
+            La6 1 - 11
+            Fa6 3.5 Mi6 0.25 Ri6 0.25 Mi6 4
+            - 8
+            Re6 3.5 Di6 0.25 Re6 0.25 Do6 4
+            - 8
+            Fa6 3.5 Mi6 0.25 Ri6 0.25 Mi6 4
+        </Track>
+        <Track Instrument="SawtoothWave" Tempo="120" Dynamics="0.5">
+            - 66
+            
+            Mi5 2
+            Do6 5 - 0.5 Do6 0.5 Re6 0.5 Do6 0.5 - 0.5 Ti5 0.25 La5 0.25
+            Ti5 5 - 1           Mi5 2
+            Re6 4.5 Re6 0.5 Di6 0.5 Re6 0.5 Mi6 0.5 Re6 0.5 - 0.5 Do6 0.25 Ti5 0.25
+            Do6 5 - 1           Mi5 2
+            Do6 5 - 0.5 Do6 0.5 Re6 0.5 Do6 0.5 - 0.5 Re6 0.25 Mi6 0.25
+            Fa6 5 - 0.5 Fa6 0.5 So6 0.5 Fa6 0.5 - 0.5 Mi6 0.25 Re6 0.25
+            Mi6 0.5 - 1 Mi6 0.5 Fa6 0.5 Mi6 0.5 - 0.5 Re6 0.25 Do6 0.25
+            Ti5 0.5 - 1 Ti5 0.5 Mi6 0.5 Re6 0.5 - 0.5 Do6 0.25 Ti5 0.25
+            La5 0.5 La5 0.5 - 0.5 La5 0.5 La5 0.5 - 0.5 La5 0.5 - 2.5
+            
+            La5 1 Si5 1
+            So5 3 So5 1 So6 2.5 Fa6 0.5 Mi6 0.5 Re6 0.5
+            Fa6 4 Mi6 4
+            Mi5 3 Mi5 1 Mi6 2.5 Re6 0.5 Do6 0.5 Ti5 0.5
+            Re6 3.5 Di6 0.5 Do6 2 La5 1 Si5 1
+            So5 3 So5 1 So6 2.5 Fa6 0.5 Mi6 0.5 Re6 0.5
+            Fa6 4 Mi6 4
+            Re6 0.25 Di6 0.25 Re6 0.25 Mi6 0.25 Fa6 0.25 Mi6 0.25 Fa6 0.25 So6 0.25 La6 0.5 Fa6 0.166 So6 0.166 Fa6 0.167 Mi6 0.5 Re6 0.5
+            Do6 0.25 Ti5 0.25 Do6 0.25 Re6 0.25 Mi6 0.25 Ri6 0.25 Mi6 0.25 Fa6 0.25 Mi6 0.5 - 1.5
+            Mi6 0.5 Mi5 0.5 Si5 0.5 Ti5 0.5 Mi6 0.5 Re6 0.5 - 0.5 Do6 0.25 Ti5 0.25
+            La5 0.5 - 0.5 Si6 1 La6 0.5 - 1.5
+        </Track>
+        <Track Instrument="SawtoothWave" Tempo="120" Dynamics="0.3">
+            - 68
+            Mi6 5 - 0.5 Mi6 0.5 Fa6 0.5 Mi6 0.5 - 0.5 Re6 0.25 Do6 0.25
+            Re6 5 - 3
+            Ti5 4.5 Ti5 0.5 La5 0.5 Ti5 0.5 Do6 0.5 Ti5 0.5 - 0.5 La5 0.25
+            - 8.25
+            Mi6 5 - 0.5 Do7 0.5 Re7 0.5 Do7 0.5 - 0.5 Re7 0.25 Mi7 0.25
+            Fa7 5 - 0.5 Fa7 0.5 So7 0.5 Fa7 0.5 - 0.5 Mi7 0.25 Re7 0.25
+            Mi7 0.5 - 1 Mi7 0.5 Fa7 0.5 Mi7 0.5 - 0.5 Re7 0.25 Do7 0.25
+            Ti6 0.5 Mi6 0.5 Si6 0.5 Ti6 0.5 Mi7 0.5 Re7 0.5 - 0.5 Do7 0.25 Ti6 0.25
+            La6 0.5 - 7.5
+        </Track>
+        <Track Instrument="SawtoothWave" Tempo="120" Dynamics="0.3">
+            - 4
+            Do5 0.5 Do5 0.5   - 0.5 Do5 0.5 Do5 0.5   - 0.5 Ti4 1
+            Do5 0.5   - 3.5
+            Ti4 0.5 Ti4 0.5   - 0.5 Ti4 0.5 Ti4 0.5   - 0.5 Li4 1
+            Ti4 0.5   - 3.5
+            Re5 0.5 Re5 0.5   - 0.5 Re5 0.5 Re5 0.5   - 0.5 Di5 1
+            Re5 0.5   - 3.5
+            Do5 0.5 Do5 0.5   - 0.5 Do5 0.5 Do5 0.5   - 0.5 Ti4 1
+            Do5 0.5   - 3.5
+            Do5 0.5 Do5 0.5   - 0.5 Do5 0.5 Do5 0.5   - 0.5 Do5 1
+            Di5 0.5   - 3.5
+            Fa5 0.5 Fa5 0.5   - 0.5 Fa5 0.5 Fa5 0.5   - 0.5 Mi5 1
+            Fa5 0.5   - 3.5
+            Do5 0.5 Do5 0.5   - 0.5 Ti4 0.5 Do5 0.5   - 1.5
+            Ti4 0.5 Ti4 0.5   - 0.5 Li4 0.5 Ti4 0.5   - 1.5
+            Mi4 0.5 Mi4 0.5   - 0.5 Mi4 0.5 Mi4 0.5   - 0.5 Mi4 1
+            Mi4 0.5   - 3.5
+            
+            La4 0.5 La4 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Mi4 1
+            La4 0.5 -   3.5
+            Mi4 0.5 Mi4 0.5 -   0.5 Ti3 0.5 Mi4 0.5 -   0.5 Ti3 1
+            Mi4 0.5 -   3.5
+            Mi4 0.5 Mi4 0.5 -   0.5 Ti3 0.5 Mi4 0.5 -   0.5 Ti3 1
+            Mi4 0.5 -   3.5
+            La4 0.5 La4 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Mi4 1
+            La4 0.5 -   3.5
+            La4 0.5 La4 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Mi4 1
+            La4 0.5 -   3.5
+            Re5 0.5 Re5 0.5 -   0.5 La4 0.5 Re5 0.5 -   0.5 La4 1
+            Re4 0.5 -   3.5
+            La4 0.5 -   2                           La4 1.5
+            Mi4 0.5 -   2                           Mi4 0.5 Fi4 0.5 Si4 0.5
+            La4 0.5 La4 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Mi4 1
+            La4 0.5 -   3.5
+            
+            So4 0.5 So4 0.5 -   0.5 Re4 0.5 So4 0.5 -   0.5 Re4 0.5 -   0.5
+            So4 0.5 So4 0.5 -   0.5 Re4 0.5 So4 0.5 -   0.5 Re4 0.5 -   0.5
+            Fa4 0.5 Fa4 0.5 -   0.5 Do4 0.5 Fa4 0.5 -   0.5 Do4 0.5 -   0.5
+            Fa3 0.5 Fa3 0.5 -   0.5 Do4 0.5 Fa4 0.5 -   0.5 Do4 0.5 -   0.5
+            Mi4 0.5 Mi4 0.5 -   0.5 Ti3 0.5 Mi4 0.5 -   0.5 Ti3 0.5 -   0.5
+            Mi4 0.5 Mi4 0.5 -   0.5 Ri4 0.5 Mi4 0.5 Fa4 0.5 Fi4 0.5 Si4 0.5
+            La4 0.5 La4 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Mi4 0.5 -   0.5
+            La3 0.5 La3 0.5 -   0.5 Mi4 0.5 La4 0.5 -   0.5 Si4 0.5 -   0.5
+            So4 0.5 So4 0.5 -   0.5 Re4 0.5 So4 0.5 -   0.5 Re4 0.5 -   0.5
+            So4 0.5 So4 0.5 -   0.5 Re4 0.5 So4 0.5 -   0.5 Re4 0.5 -   0.5
+            Fa4 0.5 Fa4 0.5 -   0.5 Do4 0.5 Fa4 0.5 -   0.5 Do4 0.5 -   0.5
+            Fa3 0.5 Fa3 0.5 -   0.5 Do4 0.5 Fa4 0.5 -   0.5 Do4 0.5 -   0.5
+            -   0.5 Fa4 0.5 -   0.5 Fa4 0.5 Fa4 0.5 -   1.5
+            -   0.5 La4 0.5 -   0.5 La4 0.5 La4 0.5 -   1.5
+            Mi4 0.5 -   3.5
+            La4 0.5 -   0.5 Mi4 0.5 -   0.5 La4 0.5 -   1.5
+        </Track>
+    </Channel>
+</Project>

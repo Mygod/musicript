@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{037D134F-FCDC-4FC8-8A8D-FF808BDC5AEF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mygod.Musicript.Interpolators.Inflection</RootNamespace>
+    <RootNamespace>Mygod.Musicript.Pitchers.Inflection</RootNamespace>
     <AssemblyName>Inflection</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -23,11 +23,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Musicript\Presets\Interpolators\</OutputPath>
+    <OutputPath>..\Musicript\Presets\Pitchers\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\Musicript\Presets\Interpolators\Inflection.XML</DocumentationFile>
+    <DocumentationFile>..\Musicript\Presets\Pitchers\Inflection.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

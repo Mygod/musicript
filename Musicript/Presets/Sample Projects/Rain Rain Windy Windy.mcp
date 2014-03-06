@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="Rain Rain Windy Windy" Composer="Kyle Gabler" Editor="Mygod"
-         Looped="True">
-    <VolumeController ID="Ding" Path="Faders" Name="LogarithmicFader"
-                      Speed="10" />
-    <Instrument ID="DingyWave" Path="Waves" Name="SineWave"
-                VolumeController="Ding" />
+<Project Name="Rain Rain Windy Windy" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
+    <Volumer ID="Ding" Path="Faders" Name="LogarithmicFader" Speed="10" />
+    <Instrument ID="DingyWave" Path="Waves" Name="SineWave" Volumer="Ding" />
     <Instrument ID="SineWave" Path="Waves" Name="SineWave" />
     <Channel>
         <Track Instrument="DingyWave" Tempo="110">

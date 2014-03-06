@@ -52,6 +52,18 @@
             <param name="time">当前时刻。（单位：秒）</param>
             <returns>返回范围在 [-1, 1] 之间的样本。</returns>
         </member>
+        <member name="T:Mygod.Musicript.Instruments.Waves.BouncySineWave">
+            <summary>
+            弹跳正弦波。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Instruments.Waves.BouncySineWave.Sample(System.Double)">
+            <summary>
+            取样。
+            </summary>
+            <param name="time">当前时刻。（单位：秒）</param>
+            <returns>返回范围在 [-1, 1] 之间的样本。</returns>
+        </member>
         <member name="T:Mygod.Musicript.Instruments.Waves.ParabolicWave">
             <summary>
             抛物波。

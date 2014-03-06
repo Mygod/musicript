@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Name="Threadcutter" Composer="Kyle Gabler" Editor="Mygod"
-         Looped="True">
+<Project Name="Threadcutter" Composer="Kyle Gabler" Editor="Mygod" Looped="True">
     <Instrument ID="TriangleWave" Path="Waves" Name="TriangleWave" />
-    <VolumeController ID="Cymbal" Path="Faders" Name="LogarithmicFader"
-                      Speed="10" />
-    <Instrument ID="CymbalNoise" Path="Waves" Name="WhiteNoise"
-                VolumeController="Cymbal" />
+    <Volumer ID="Cymbal" Path="Faders" Name="LogarithmicFader" Speed="10" />
+    <Instrument ID="CymbalNoise" Path="Waves" Name="WhiteNoise" Volumer="Cymbal" />
     <Channel>
         <Track Instrument="TriangleWave" Tempo="78">
             E 5 9 D#5 10 C#5 11 D 5 5 C#5 6 D 5 5 E 5 5 F#5 5 G#5 5 A 5 7

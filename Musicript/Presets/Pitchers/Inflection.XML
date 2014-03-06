@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Inflection</name>
+    </assembly>
+    <members>
+        <member name="T:Mygod.Musicript.Pitchers.Inflection.LinearInflection">
+            <summary>
+            线性变调。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Inflection.LinearInflection.SetSpeed(System.String)">
+            <summary>
+            设置变调速度。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Inflection.LinearInflection.Pitch(System.Double,System.Double)">
+            <summary>
+            变调。
+            </summary>
+            <param name="frequency">原频率。</param>
+            <param name="time">时刻。</param>
+            <returns>变调后映射到的时刻。</returns>
+        </member>
+        <member name="T:Mygod.Musicript.Pitchers.Inflection.LogarithmicInflection">
+            <summary>
+            对数变调。
+            </summary>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Inflection.LogarithmicInflection.SetSpeed(System.String)">
+            <summary>
+            设置变调速度。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Mygod.Musicript.Pitchers.Inflection.LogarithmicInflection.Pitch(System.Double,System.Double)">
+            <summary>
+            变调。
+            </summary>
+            <param name="frequency">原频率。</param>
+            <param name="time">时刻。</param>
+            <returns>变调后映射到的时刻。</returns>
+        </member>
+    </members>
+</doc>
