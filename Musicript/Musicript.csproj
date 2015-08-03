@@ -220,9 +220,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>md "$(TargetDir)Bin"
-move /y "$(TargetDir)irrKlang.NET4.dll" "$(TargetDir)Bin\irrKlang.NET4.dll"
-move /y "$(TargetDir)MygodLibrary.dll" "$(TargetDir)Bin\MygodLibrary.dll"
-move /y "$(TargetDir)MygodLibrary.pdb" "$(TargetDir)Bin\MygodLibrary.pdb"</PostBuildEvent>
+move /y "$(TargetDir)*.dll" "$(TargetDir)Bin"
+move /y "$(TargetDir)*.pdb" "$(TargetDir)Bin"
+move /y "$(TargetDir)Bin\Musicript.pdb" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
