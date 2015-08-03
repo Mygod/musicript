@@ -142,25 +142,25 @@ namespace Mygod.Musicript
             else if (match.Groups[3].Success) Frequency = double.Parse(match.Groups[3].Value);
             else
             {
-                int height;
+                int pitch;
                 if (match.Groups[5].Success)
                 {
                     var ch = match.Groups[5].Value[0];
-                    height = NoteMappings[(ch + 7 - (ch <= '7' ? '1' : 'c')) % 7];
+                    pitch = NoteMappings[(ch + 7 - (ch <= '7' ? '1' : 'c')) % 7];
                     foreach (var c in match.Groups[6].Value)
                         switch (c)
                         {
                             case 'b':
-                                height--;
+                                pitch--;
                                 break;
                             case '#':
-                                height++;
+                                pitch++;
                                 break;
                         }
                 }
-                else height = SyllableMappings[match.Groups[4].Value];
-                height += int.Parse(match.Groups[7].Value) * 12;
-                Frequency = 8.17579891564375 * Math.Pow(2, height / 12.0);
+                else pitch = SyllableMappings[match.Groups[4].Value];
+                pitch += int.Parse(match.Groups[7].Value) * 12;
+                Frequency = 8.17579891564375 * Math.Pow(2, pitch / 12.0);
             }
         }
 
