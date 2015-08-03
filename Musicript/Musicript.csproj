@@ -36,10 +36,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Mygod.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Main.ico</ApplicationIcon>
@@ -118,8 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
-    <None Include="Mygod.cer" />
-    <None Include="Mygod.pfx" />
     <None Include="Presets\Sample Projects\06 - 8 Bit Inferno %28full%29.mcp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -220,8 +219,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x86\signtool.exe" sign /v /f "$(ProjectDir)Mygod.pfx" /t http://timestamp.verisign.com/scripts/timestamp.dll "$(TargetDir)$(TargetFileName)"
-md "$(TargetDir)Bin"
+    <PostBuildEvent>md "$(TargetDir)Bin"
 move /y "$(TargetDir)irrKlang.NET4.dll" "$(TargetDir)Bin\irrKlang.NET4.dll"
 move /y "$(TargetDir)MygodLibrary.dll" "$(TargetDir)Bin\MygodLibrary.dll"
 move /y "$(TargetDir)MygodLibrary.pdb" "$(TargetDir)Bin\MygodLibrary.pdb"</PostBuildEvent>
