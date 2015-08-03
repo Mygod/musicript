@@ -423,7 +423,7 @@ namespace Mygod.Musicript
                     var up = 1L << ((bytesPerSample << 3) - 1);
                     var val = Math.Round(k * (up - 1));
                     last = BitConverter.GetBytes(bytesPerSample == 1 ? (long) val + 128
-                        : val >= 0 || bytesPerSample >= 8 ? (long) val : up + up + 1 - (long) -val);
+                        : val >= 0 || bytesPerSample >= 8 ? (long) val : up + up + 1 + (long) val);
                 }
                 else if (bytesPerSample == -4) last = BitConverter.GetBytes((float) k);
                 else if (bytesPerSample == -8) last = BitConverter.GetBytes(k);
