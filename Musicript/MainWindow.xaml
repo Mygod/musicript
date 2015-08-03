@@ -1,6 +1,6 @@
 ﻿<Window x:Class="Mygod.Musicript.MainWindow" SizeToContent="WidthAndHeight"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygodstudio.tk/wpf"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="http://schemas.mygod.tk/wpf"
         ResizeMode="CanMinimize" Title="{x:Static m:CurrentApp.Title}" Icon="{x:Static m:CurrentApp.MainIcon}">
     <Grid Margin="5">
         <Grid.RowDefinitions>

@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Threading;
-using Mygod.Windows.Dialogs;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Mygod.Musicript
 {
@@ -36,9 +36,9 @@ namespace Mygod.Musicript
             if (e == null || e is ThreadAbortException) return;
             var msg = e.GetMessage();
             File.AppendAllText("crash.log", msg + Environment.NewLine);
-            TaskDialog.Show(null, "貌似这个程序发生了某种未知错误。",
-                            "为了解决此问题，请将目录下的 crash.log 发给作者。(mygod.tk)",
-                            TaskDialogType.Error, expandedInfo: e.GetMessage());
+            TaskDialog.Show(null, "崩溃", "貌似这个程序发生了某种未知错误。",
+                            "为了解决此问题，请将目录下的 crash.log 发给作者。(mygod.tk)", 
+                            TaskDialogType.Error, e.GetMessage());
             Current.Shutdown();
         }
     }

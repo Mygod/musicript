@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mygod")]
 [assembly: AssemblyProduct("Musicript")]
-[assembly: AssemblyCopyright("Copyright © Mygod 2014")]
+[assembly: AssemblyCopyright("Copyright © Mygod 2014-2015")]
 [assembly: AssemblyTrademark("Mygod")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // 可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”: 
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.3.4")]
-[assembly: AssemblyFileVersion("1.0.3.4")]
+[assembly: AssemblyVersion("1.0.4.352")]
+[assembly: AssemblyFileVersion("1.0.4.352")]

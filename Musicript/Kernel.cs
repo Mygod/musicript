@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.Windows;
-using Mygod.Windows.Dialogs;
 using Mygod.Xml.Linq;
 
 namespace Mygod.Musicript
@@ -28,8 +28,7 @@ namespace Mygod.Musicript
         public static Type GetType(this XElement element, string dir = null)
         {
             string path = element.GetAttributeValue("Path"), fullPath, type = element.Name.LocalName + 's',
-                   name = string.Format("Mygod.Musicript.{0}.{1}.{2}", type, path.Replace('/', '.'),
-                                        element.GetAttributeValue("Name"));
+                   name = $"Mygod.Musicript.{type}.{path.Replace('/', '.')}.{element.GetAttributeValue("Name")}";
             path += ".dll";
             if (dir == null || !File.Exists(fullPath = Path.Combine(dir, type, path)))
                 if (!File.Exists(fullPath = Path.Combine(CurrentApp.Directory, "Presets", type, path)))
@@ -96,7 +95,7 @@ namespace Mygod.Musicript
         public double Sample(double frequency, double time)
         {
             var result = (double)sample.Invoke(instrument, new object[]
-                { pitcher == null ? frequency * time : pitcher.Pitch(frequency, time) });
+                { pitcher?.Pitch(frequency, time) ?? frequency * time });
             if (volumer != null) result *= volumer.GetVolume(time);
             return result;
         }
@@ -210,7 +209,7 @@ namespace Mygod.Musicript
 
         private int currentNodeIndex;
         private double currentNoteStartTime;
-        private Project project;
+        private readonly Project project;
 
         public double Update(double time)
         {
@@ -339,7 +338,7 @@ namespace Mygod.Musicript
             var dataChunkSize = (long) Math.Ceiling(samplesPerSecond * project.Length) * frameSize;
             if ((length = dataChunkSize + 36) > 4294967295)
             {
-                TaskDialog.Show(null, "部分音乐将会被截断。",
+                TaskDialog.Show(null, "警告", "部分音乐将会被截断。",
                                 "原因：声道数/位深度/取样率/音乐长度过大使得音乐长度超出了 4G！", TaskDialogType.Warning);
                 dataChunkSize = 4294967259 / frameSize * frameSize;
                 length = dataChunkSize + 36;
@@ -455,10 +454,10 @@ namespace Mygod.Musicript
             throw new NotSupportedException();
         }
 
-        public override bool CanRead { get { return true; } }
-        public override bool CanSeek { get { return false; } }
-        public override bool CanWrite { get { return false; } }
-        public override long Length { get { return length; } }
+        public override bool CanRead => true;
+        public override bool CanSeek => false;
+        public override bool CanWrite => false;
+        public override long Length => length;
         public override long Position { get { return position; } set { throw new NotSupportedException(); } }
     }
 }

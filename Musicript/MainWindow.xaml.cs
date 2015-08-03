@@ -3,9 +3,10 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using IrrKlang;
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Mygod.Net;
 using Mygod.Windows;
-using Mygod.Windows.Dialogs;
 
 namespace Mygod.Musicript
 {
@@ -45,9 +46,8 @@ namespace Mygod.Musicript
 
         private void ShowMessage(Project proj, ProjectWavStream stream)
         {
-            DetailsText.Text = string.Format("{0} - {1} ({2} 制作)", proj.Name, proj.Composer, proj.Editor);
-            OverflowText.Text = string.Format("上溢 {0} 次，下溢 {1} 次。",
-                                              stream.OverflowCount, stream.UnderflowCount);
+            DetailsText.Text = $"{proj.Name} - {proj.Composer} ({proj.Editor} 制作)";
+            OverflowText.Text = $"上溢 {stream.OverflowCount} 次，下溢 {stream.UnderflowCount} 次。";
         }
 
         private void Play(object sender, RoutedEventArgs e)
@@ -93,9 +93,9 @@ namespace Mygod.Musicript
 
         private void CheckForUpdates(object sender, RoutedEventArgs e)
         {
-            WebsiteManager.CheckForUpdates(221,
-                () => TaskDialog.Show(this, "没有可用的更新。", type: TaskDialogType.Information),
-                exc => TaskDialog.Show(this, "检查更新失败。", type: TaskDialogType.Error,
+            WebsiteManager.CheckForUpdates(
+                () => TaskDialog.Show(this, "信息", "没有可用的更新。", type: TaskDialogType.Information),
+                exc => TaskDialog.Show(this, "错误", "检查更新失败。", type: TaskDialogType.Error,
                                        expandedInfo: exc.GetMessage()));
         }
     }
