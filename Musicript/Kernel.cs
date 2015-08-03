@@ -36,7 +36,7 @@ namespace Mygod.Musicript
             var temp = fullPath.ToLowerInvariant();
             Assembly assembly;
             if (ImportedAssemblies.ContainsKey(temp)) assembly = ImportedAssemblies[temp];
-            else ImportedAssemblies.Add(temp, assembly = Assembly.LoadFrom(fullPath));
+            else ImportedAssemblies.Add(temp, assembly = Assembly.UnsafeLoadFrom(fullPath));
             return assembly.GetType(name);
         }
 
