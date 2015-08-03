@@ -213,3 +213,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+Musicript/Presets/Instruments/
+Musicript/Presets/Pitchers/
+Musicript/Presets/Volumers/

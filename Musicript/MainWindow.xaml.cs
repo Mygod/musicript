@@ -36,8 +36,7 @@ namespace Mygod.Musicript
         private static readonly ISoundEngine Engine = new ISoundEngine();
         private static ISound sound;
         private static int index;
-        private static readonly ISoundStopEventReceiver
-            Receiver = new SoundStopEventReceiver();
+        private static readonly ISoundStopEventReceiver Receiver = new SoundStopEventReceiver();
 
         private void BrowseProject(object sender, RoutedEventArgs e)
         {
