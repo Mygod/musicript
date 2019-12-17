@@ -23,10 +23,10 @@ def beep():
 @track_worker()
 def percussion():
     instrument(Instrument(WhiteNoise(), volume_modifier=ExponentialDiminishingVolumeModifier(5))); loudness(0.2)
-    note(1, 0.5)
-    note(1); yield 0.25     # equivalent
-    note(1, 0.25)
-    note(1, 0.5)
+    while True:                 # infinite loops are okay! shorter tracks will terminate first
+        note(1, 0.5)
+        note(1); yield 0.25     # equivalent
+        note(1, 0.25)
 
 
 def main():
