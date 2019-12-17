@@ -5,9 +5,10 @@ import inspect
 tagged = {}
 
 
-def __check_recursive_yield(func, *args, **kwargs):
+def __check_recursive_yield(func, env, *args, **kwargs):
     out = func(*args, **kwargs)
     if func in tagged:  # alternatively we could use inspect.isgeneratorfunction but might be too inefficient
+        out.gi_frame.f_globals.update(env)
         for r in out:
             yield r
 
@@ -36,10 +37,11 @@ class RecursiveYielder(ast.NodeTransformer):
         call = node.value
         if isinstance(call, ast.Call):          # we are only interested in Calls as a single expression
             self.changed = True
-            node = easy_parse('for i in __check_recursive_yield(): yield i')
+            node = easy_parse('for i in __check_recursive_yield(globals()): yield i')
             assert isinstance(node, ast.For)    # For and Expr are interchangeable (both stmt)
             assert isinstance(node.iter, ast.Call)
-            call.args = [call.func] + call.args
+            assert len(node.iter.args) == 1
+            call.args = [call.func, node.iter.args[0]] + call.args
             call.func = node.iter.func
             node.iter = call
             return node

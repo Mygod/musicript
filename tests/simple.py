@@ -5,10 +5,15 @@ from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 
 @track_worker()
+def caug_arpeggiated4(duration):
+    c4(duration / 3); e4(duration / 3); gs4(duration / 3)
+
+
+@track_worker()
 def beep():
     instrument(Instrument(SineWave())); loudness(0.5)
     temperament(EqualTemperament12())
-    c4(1/6); e4(1/6); gs4(1/6)
+    caug_arpeggiated4(1/2)
     c5(1/2)
     c4(1/2)
 
