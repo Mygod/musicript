@@ -1,6 +1,7 @@
 import types
 
 from .core import Instrument, isolate_globals, setup_functions
+from .temperaments import Temperament
 
 
 class Track:
@@ -28,6 +29,9 @@ class Track:
         def note(f: float):
             self.frequency = f
             self.note_time = 0
+
+        def temperament(t: Temperament):
+            t.setup(self.generator.gi_frame.f_globals)
 
         setup_functions(self.generator.gi_frame.f_globals)
 
