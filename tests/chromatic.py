@@ -1,4 +1,4 @@
-from musicript import Musicript, Instrument, Track, track_worker
+from musicript import Musicript, Instrument, Track, bpm, track_worker
 from musicript.temperaments import Midi
 from musicript.timbres import SquareWave
 
@@ -7,8 +7,9 @@ from musicript.timbres import SquareWave
 def beep():
     instrument(Instrument(SquareWave())); loudness(0.1)
     temperament(Midi())
+    time_scale(bpm(108))
     for i in range(128):
-        midi(i, 0.1)
+        midi(i, 1/4)
 
 
 def main():

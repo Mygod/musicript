@@ -1,7 +1,6 @@
 import inspect
 import types
 
-from .recursiveyielder import get_worker_source
 from .timbres import Timbre
 from .volumemodifiers import VolumeModifier, ConstantVolumeModifier
 
@@ -26,6 +25,10 @@ class Instrument:
 
     def declick(self, frequency, time):
         self.offset += frequency * time
+
+
+def bpm(i):
+    return 60 / i
 
 
 def setup_functions(scope):

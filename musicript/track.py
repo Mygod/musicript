@@ -17,6 +17,7 @@ class Track:
         self.loudness = .01
         self.note_time = 0
         self.declick = True
+        self.time_scale = 1
 
     def __setup(self):
         def declick(d: bool):
@@ -42,6 +43,9 @@ class Track:
             # print(inspect.stack()[2].frame)
             t.setup(self.generator.gi_frame.f_globals, inspect.stack()[2].frame.f_globals)
 
+        def time_scale(t: float):
+            self.time_scale = t
+
         setup_functions(self.generator.gi_frame.f_globals)
 
     def update(self, delta):
@@ -52,7 +56,7 @@ class Track:
             while delta >= self.next_update:
                 delta -= self.next_update
                 self.note_time += self.next_update
-                self.next_update = next(self.generator)
+                self.next_update = next(self.generator) * self.time_scale
         self.next_update -= delta
         if self.instrument is None or self.frequency < 1e-8:
             # print(self.generator.gi_frame.f_globals)
