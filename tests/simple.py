@@ -1,12 +1,13 @@
-from musicript import Musicript, Track
-from musicript.instruments import SineWave
+from musicript import Musicript, Instrument, Track
+from musicript.timbres import SineWave
+from musicript.volume_modifiers import ExponentialDiminishingVolumeModifier
 
 
 def beep():
-    instrument(SineWave()); loudness(0.5)
+    instrument(Instrument(SineWave(), volume_modifier=ExponentialDiminishingVolumeModifier(5))); loudness(0.5)
     note(440); yield 0.5
     note(880); yield 0.5
-    note(440); yield 0.5
+    note(440); yield 1
 
 
 def main():

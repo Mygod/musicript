@@ -1,7 +1,6 @@
 import types
 
-from .core import setup_functions
-from .instruments import Instrument
+from .core import Instrument, setup_functions
 
 
 class Track:
@@ -42,4 +41,4 @@ class Track:
             # print(self.generator.gi_frame.f_globals)
             return 0
         self.note_time += delta
-        return self.instrument.sample(self.frequency * self.note_time) * self.loudness
+        return self.instrument.sample(self.frequency, self.note_time) * self.loudness
