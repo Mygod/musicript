@@ -29,6 +29,6 @@ def percussion():
 
 def main():
     music = Musicript()
-    music.tracks.append(Track(beep))
-    music.tracks.append(Track(percussion))
+    music.tracks.append(Track(beep()))
+    music.tracks.append(Track(percussion()))
     return music

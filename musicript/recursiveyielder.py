@@ -54,17 +54,19 @@ def track_worker(debug=False, transform=True):
         tag = None
         if transform:
             transformer = RecursiveYielder()
-            visited = transformer.visit(ast.parse(inspect.getsource(func)))
+            source = inspect.getsource(func)
+            visited = transformer.visit(ast.parse(source))
+            new_globals = func.__globals__.copy()
+            name = func.__name__
             if transformer.changed:
                 if debug:
                     import astor
                     print(astor.to_source(visited))
-                env = func.__globals__
-                name = func.__name__
-                compiled = compile(ast.fix_missing_locations(visited), '', 'exec')
-                exec(compiled, env)
-                func = env[name]
-                tag = compiled
+                tag = compile(ast.fix_missing_locations(visited), '', 'exec')
+            else:
+                tag = source
+            exec(tag, new_globals)
+            func = new_globals[name]
         tagged[func] = tag
         return func
     return do_transform

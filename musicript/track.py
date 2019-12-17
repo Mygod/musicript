@@ -1,13 +1,12 @@
 import types
 
 from . import Instrument, track_worker
-from .core import isolate_globals, setup_functions
+from .core import setup_functions
 from .temperaments import Temperament
 
 
 class Track:
     def __init__(self, generator):
-        generator = isolate_globals(generator)()
         assert isinstance(generator, types.GeneratorType)
         self.generator = generator
         self.next_update = 0

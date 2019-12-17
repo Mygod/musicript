@@ -23,12 +23,6 @@ class Instrument:
         return self.timbre.sample(frequency * time) * self.volume_modifier.volume(time)
 
 
-def isolate_globals(func):
-    new_globals = func.__globals__.copy()
-    exec(get_worker_source(func), new_globals)
-    return new_globals[func.__name__]
-
-
 def setup_functions(scope):
     for key, value in inspect.stack()[1].frame.f_locals.items():
         if isinstance(value, types.FunctionType):
