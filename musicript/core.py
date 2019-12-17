@@ -18,9 +18,14 @@ class Instrument:
     def __init__(self, timbre: Timbre, volume_modifier: VolumeModifier = ConstantVolumeModifier()):
         self.timbre = timbre
         self.volume_modifier = volume_modifier
+        self.offset = 0
 
     def sample(self, frequency, time):
-        return self.timbre.sample(frequency * time) * self.volume_modifier.volume(time)
+        # print(self.offset + frequency * time)
+        return self.timbre.sample(self.offset + frequency * time) * self.volume_modifier.volume(time)
+
+    def declick(self, frequency, time):
+        self.offset += frequency * time
 
 
 def setup_functions(scope):

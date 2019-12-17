@@ -16,8 +16,12 @@ class Track:
         self.frequency = 0
         self.loudness = .01
         self.note_time = 0
+        self.declick = True
 
     def __setup(self):
+        def declick(d: bool):
+            self.declick = d
+
         def frequency(f: float):
             self.frequency = f
 
@@ -42,10 +46,13 @@ class Track:
 
     def update(self, delta):
         assert delta >= 0   # backtracking is not allowed
-        while delta >= self.next_update:
-            delta -= self.next_update
-            self.note_time += self.next_update
-            self.next_update = next(self.generator)
+        if delta >= self.next_update:
+            if self.declick and self.instrument is not None:
+                self.instrument.declick(self.frequency, self.note_time)
+            while delta >= self.next_update:
+                delta -= self.next_update
+                self.note_time += self.next_update
+                self.next_update = next(self.generator)
         self.next_update -= delta
         if self.instrument is None or self.frequency < 1e-8:
             # print(self.generator.gi_frame.f_globals)
