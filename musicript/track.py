@@ -1,6 +1,7 @@
 import types
 
-from .core import Instrument, isolate_globals, setup_functions
+from . import Instrument, track_worker
+from .core import isolate_globals, setup_functions
 from .temperaments import Temperament
 
 
@@ -26,9 +27,12 @@ class Track:
         def loudness(l: float):
             self.loudness = l
 
-        def note(f: float):
+        @track_worker(transform=False)
+        def note(f: float, duration=None):
             self.frequency = f
             self.note_time = 0
+            if duration is not None:
+                yield duration
 
         def temperament(t: Temperament):
             t.setup(self.generator.gi_frame.f_globals)

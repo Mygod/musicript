@@ -47,24 +47,25 @@ class RecursiveYielder(ast.NodeTransformer):
             return super().generic_visit(node)
 
 
-def track_worker(debug=False):
-    def transform(func):
-        transformer = RecursiveYielder()
-        visited = transformer.visit(ast.parse(inspect.getsource(func)))
-        if transformer.changed:
-            if debug:
-                import astor
-                print(astor.to_source(visited))
-            env = func.__globals__
-            name = func.__name__
-            compiled = compile(ast.fix_missing_locations(visited), '', 'exec')
-            exec(compiled, env)
-            func = env[name]
-            tagged[func] = compiled
-        else:
-            tagged[func] = None
+def track_worker(debug=False, transform=True):
+    def do_transform(func):
+        tag = None
+        if transform:
+            transformer = RecursiveYielder()
+            visited = transformer.visit(ast.parse(inspect.getsource(func)))
+            if transformer.changed:
+                if debug:
+                    import astor
+                    print(astor.to_source(visited))
+                env = func.__globals__
+                name = func.__name__
+                compiled = compile(ast.fix_missing_locations(visited), '', 'exec')
+                exec(compiled, env)
+                func = env[name]
+                tag = compiled
+        tagged[func] = tag
         return func
-    return transform
+    return do_transform
 
 
 def get_worker_source(func):

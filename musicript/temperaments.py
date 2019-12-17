@@ -1,6 +1,17 @@
 import math
 from abc import ABC, abstractmethod
 
+from . import track_worker
+
+
+def make_sound(note, pitch):
+    @track_worker(transform=False)  # does not work with transform yet
+    def sound(*args, **kwargs):
+        # print(pitch)
+        for r in note(pitch, *args, **kwargs):
+            yield r
+    return sound
+
 
 class Temperament(ABC):
     @abstractmethod
@@ -22,5 +33,4 @@ class EqualTemperament12(Temperament):
             for i, letter in enumerate('cdefgab'):
                 diff = midino(i, octave) - baseline
                 for j, suffix in enumerate(['bb', 'b', '', 's', 'x']):
-                    scope[letter + suffix + octave_name] = \
-                        lambda p=math.pow(2, (diff + j - 2) / 12) * self.a4, *args, **kwargs: note(p, *args, **kwargs)
+                    scope[letter + suffix + octave_name] = make_sound(note, math.pow(2, (diff + j - 2) / 12) * self.a4)

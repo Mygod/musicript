@@ -4,17 +4,16 @@ from musicript.timbres import SineWave, WhiteNoise
 from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 
-@track_worker(debug=True)
+@track_worker()
 def beep():
     instrument(Instrument(SineWave())); loudness(0.5)
     temperament(EqualTemperament12())
-    c4(); yield 1/6
-    e4(); yield 1/6
-    gs4(); yield 1/6
-    c5(); yield 0.5
-    c4(); yield 0.5
+    c4(1/6); e4(1/6); gs4(1/6)
+    c5(1/2)
+    c4(1/2)
 
 
+@track_worker()
 def percussion():
     instrument(Instrument(WhiteNoise(), volume_modifier=ExponentialDiminishingVolumeModifier(5))); loudness(0.2)
     note(1); yield 0.5
