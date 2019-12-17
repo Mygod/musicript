@@ -3,7 +3,7 @@ import types
 
 from .recursiveyielder import get_worker_source
 from .timbres import Timbre
-from .volume_modifiers import VolumeModifier, ConstantVolumeModifier
+from .volumemodifiers import VolumeModifier, ConstantVolumeModifier
 
 
 class Musicript:

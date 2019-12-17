@@ -1,7 +1,7 @@
 from musicript import Musicript, Instrument, Track, track_worker
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SineWave, WhiteNoise
-from musicript.volume_modifiers import ExponentialDiminishingVolumeModifier
+from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 
 @track_worker(debug=True)
