@@ -1,10 +1,11 @@
 import types
 
-from .core import Instrument, setup_functions
+from .core import Instrument, isolate_globals, setup_functions
 
 
 class Track:
     def __init__(self, generator):
+        generator = isolate_globals(generator)()
         assert isinstance(generator, types.GeneratorType)
         self.generator = generator
         self.next_update = 0
