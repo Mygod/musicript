@@ -1,9 +1,10 @@
-from musicript import Musicript, Instrument, Track
+from musicript import Musicript, Instrument, Track, track_worker
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SineWave, WhiteNoise
 from musicript.volume_modifiers import ExponentialDiminishingVolumeModifier
 
 
+@track_worker(debug=True)
 def beep():
     instrument(Instrument(SineWave())); loudness(0.5)
     temperament(EqualTemperament12())

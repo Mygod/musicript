@@ -1,6 +1,7 @@
 import inspect
 import types
 
+from .recursiveyielder import get_worker_source
 from .timbres import Timbre
 from .volume_modifiers import VolumeModifier, ConstantVolumeModifier
 
@@ -24,7 +25,7 @@ class Instrument:
 
 def isolate_globals(func):
     new_globals = func.__globals__.copy()
-    exec(inspect.getsource(func), new_globals)
+    exec(get_worker_source(func), new_globals)
     return new_globals[func.__name__]
 
 
