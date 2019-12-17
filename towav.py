@@ -9,10 +9,10 @@ music = sys.modules[sys.argv[1]].main()
 with wave.open(sys.argv[2], 'wb') as wav:
     wav.setnchannels(1)
     wav.setsampwidth(2)
-    wav.setframerate(44100)
+    wav.setframerate(48000)
     while True:
         try:
-            data = struct.pack('<h', int(32767 * music.update(1 / 44100)))
+            data = struct.pack('<h', int(32767 * music.update(1 / 48000)))
             wav.writeframesraw(data)
         except StopIteration:
             break

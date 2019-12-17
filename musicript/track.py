@@ -1,7 +1,7 @@
 import types
 
-from musicript.core import setup_functions
-from musicript.instruments import Instrument
+from .core import setup_functions
+from .instruments import Instrument
 
 
 class Track:
