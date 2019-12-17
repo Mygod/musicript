@@ -5,11 +5,11 @@ from musicript import Musicript, Track
 from musicript.instruments import SineWave
 
 
-# noinspection PyUnusedLocal
 def beep():
-    instrument = SineWave(); loudness = 0.5
-    frequency = 440
-    yield 2
+    instrument(SineWave()); loudness(0.5)
+    note(440); yield 0.5
+    note(880); yield 0.5
+    note(440); yield 0.5
 
 
 def sine():

@@ -1,3 +1,7 @@
+import inspect
+import types
+
+
 class Musicript:
     def __init__(self):
         self.tracks = []
@@ -6,12 +10,7 @@ class Musicript:
         return sum([track.update(time) for track in self.tracks])
 
 
-class VariableScope:
-    def __init__(self, scope):
-        object.__setattr__(self, 'scope', scope)
-
-    def __getattribute__(self, item):
-        return object.__getattribute__(self, 'scope')[item]
-
-    def __setattr__(self, key, value):
-        object.__getattribute__(self, 'scope')[key] = value
+def setup_functions(scope):
+    for key, value in inspect.stack()[1].frame.f_locals.items():
+        if isinstance(value, types.FunctionType):
+            scope[key] = value
