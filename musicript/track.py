@@ -34,9 +34,9 @@ class Track:
     def update(self, delta):
         assert delta >= 0   # backtracking is not allowed
         while delta >= self.next_update:
+            delta -= self.next_update
             self.note_time += self.next_update
             self.next_update = next(self.generator)
-            delta -= self.next_update
         self.next_update -= delta
         if self.instrument is None or self.frequency < 1e-8:
             # print(self.generator.gi_frame.f_globals)

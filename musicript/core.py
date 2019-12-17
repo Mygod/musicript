@@ -6,8 +6,8 @@ class Musicript:
     def __init__(self):
         self.tracks = []
 
-    def update(self, time):
-        return sum([track.update(time) for track in self.tracks])
+    def update(self, delta):
+        return sum([track.update(delta) for track in self.tracks])
 
 
 def setup_functions(scope):
