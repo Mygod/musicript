@@ -2,6 +2,7 @@ import inspect
 import types
 
 from .timbres import Timbre
+from .timemodifiers import TimeModifier, ConstantTimeModifier
 from .volumemodifiers import VolumeModifier, ConstantVolumeModifier
 
 
@@ -14,14 +15,18 @@ class Musicript:
 
 
 class Instrument:
-    def __init__(self, timbre: Timbre, volume_modifier: VolumeModifier = ConstantVolumeModifier()):
+    def __init__(self, timbre: Timbre,
+                 time_modifier: TimeModifier = ConstantTimeModifier(),
+                 volume_modifier: VolumeModifier = ConstantVolumeModifier()):
         self.timbre = timbre
+        self.time_modifier = time_modifier
         self.volume_modifier = volume_modifier
         self.offset = 0
 
     def sample(self, frequency, time):
-        # print(self.offset + frequency * time)
-        return self.timbre.sample(self.offset + frequency * time) * self.volume_modifier.volume(time)
+        t = self.offset + frequency * time + self.time_modifier.sample(time)
+        # print(t)
+        return self.timbre.sample(t) * self.volume_modifier.volume(time)
 
     def declick(self, frequency, time):
         self.offset += frequency * time

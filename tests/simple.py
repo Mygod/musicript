@@ -1,6 +1,7 @@
 from musicript import Musicript, Instrument, Track, track_worker
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SineWave, WhiteNoise
+from musicript.timemodifiers import Vibrato
 from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 
@@ -12,7 +13,7 @@ def caug_arpeggiated4(duration):
 
 @track_worker()
 def beep():
-    instrument(Instrument(SineWave())); loudness(0.5)
+    instrument(Instrument(SineWave(), time_modifier=Vibrato())); loudness(0.5)
     temperament(EqualTemperament12())
     caug_arpeggiated4(1/2)
     c5(1/2)
