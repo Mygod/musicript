@@ -21,10 +21,10 @@ def beep():
 @track_worker()
 def percussion():
     instrument(Instrument(WhiteNoise(), volume_modifier=ExponentialDiminishingVolumeModifier(5))); loudness(0.2)
-    note(1); yield 0.5
-    note(1); yield 0.25
-    note(1); yield 0.25
-    note(1); yield 0.5
+    note(1, 0.5)
+    note(1); yield 0.25     # equivalent
+    note(1, 0.25)
+    note(1, 0.5)
 
 
 def main():
