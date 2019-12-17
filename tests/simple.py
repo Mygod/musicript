@@ -17,7 +17,7 @@ def beep():
     temperament(EqualTemperament12())
     caug_arpeggiated4(1/2)
     c5(1/2)
-    c4(1/2)
+    c4(); yield 1/2             # alternative way to hold time
 
 
 @track_worker()
@@ -25,8 +25,8 @@ def percussion():
     instrument(Instrument(WhiteNoise(), volume_modifier=ExponentialDiminishingVolumeModifier(5))); loudness(0.2)
     while True:                 # infinite loops are okay! shorter tracks will terminate first
         note(1, 0.5)
-        note(1); yield 0.25     # equivalent
-        note(1, 0.25)
+        for i in range(4):
+            note(1, 1/8)
 
 
 def main():
