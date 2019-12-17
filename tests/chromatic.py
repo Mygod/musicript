@@ -1,0 +1,17 @@
+from musicript import Musicript, Instrument, Track, track_worker
+from musicript.temperaments import Midi
+from musicript.timbres import SquareWave
+
+
+@track_worker()
+def beep():
+    instrument(Instrument(SquareWave())); loudness(0.1)
+    temperament(Midi())
+    for i in range(128):
+        midi(i, 0.1)
+
+
+def main():
+    music = Musicript()
+    music.tracks.append(Track(beep()))
+    return music

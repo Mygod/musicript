@@ -19,6 +19,21 @@ class Temperament(ABC):
         pass
 
 
+class Midi(Temperament):
+    def __init__(self, a4=440):
+        self.a4 = a4
+
+    def setup(self, gscope, lscope):
+        @track_worker(transform=False)
+        def midi(midino, *args, **kwargs):
+            pitch = math.pow(2, (midino - 69) / 12) * self.a4
+            # print(pitch)
+            for r in note(pitch, *args, **kwargs):
+                yield r
+        note = gscope['note']
+        lscope['midi'] = midi
+
+
 class EqualTemperament12(Temperament):
     def __init__(self, a4=440):
         self.a4 = a4

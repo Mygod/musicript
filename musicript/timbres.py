@@ -16,7 +16,7 @@ class SineWave(Timbre):
 
 class SquareWave(Timbre):
     def sample(self, time):
-        time - math.floor(time)
+        time -= math.floor(time)
         return math.floor(time * 2) * 2 - 1
 
 
