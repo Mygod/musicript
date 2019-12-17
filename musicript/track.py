@@ -1,3 +1,4 @@
+import inspect
 import types
 
 from . import Instrument, track_worker
@@ -34,7 +35,8 @@ class Track:
                 yield duration
 
         def temperament(t: Temperament):
-            t.setup(self.generator.gi_frame.f_globals)
+            # print(inspect.stack()[2].frame)
+            t.setup(self.generator.gi_frame.f_globals, inspect.stack()[2].frame.f_globals)
 
         setup_functions(self.generator.gi_frame.f_globals)
 

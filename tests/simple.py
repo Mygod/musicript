@@ -6,6 +6,7 @@ from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 @track_worker()
 def caug_arpeggiated4(duration):
+    temperament(EqualTemperament12())
     c4(duration / 3); e4(duration / 3); gs4(duration / 3)
 
 
