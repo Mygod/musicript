@@ -7,9 +7,11 @@ from musicript.volume_modifiers import ExponentialDiminishingVolumeModifier
 def beep():
     instrument(Instrument(SineWave())); loudness(0.5)
     temperament(EqualTemperament12())
-    a4(); yield 0.5
-    a5(); yield 0.5
-    a4(); yield 0.5
+    c4(); yield 1/6
+    e4(); yield 1/6
+    gs4(); yield 1/6
+    c5(); yield 0.5
+    c4(); yield 0.5
 
 
 def percussion():

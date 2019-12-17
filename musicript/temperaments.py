@@ -21,5 +21,6 @@ class EqualTemperament12(Temperament):
             octave_name = str(octave) if octave >= 0 else '_' + str(-octave)
             for i, letter in enumerate('cdefgab'):
                 diff = midino(i, octave) - baseline
-                pitch = math.pow(2, diff / 12) * self.a4
-                scope[letter + octave_name] = lambda p=pitch, *args, **kwargs: note(p, *args, **kwargs)
+                for j, suffix in enumerate(['bb', 'b', '', 's', 'x']):
+                    scope[letter + suffix + octave_name] = \
+                        lambda p=math.pow(2, (diff + j - 2) / 12) * self.a4, *args, **kwargs: note(p, *args, **kwargs)
