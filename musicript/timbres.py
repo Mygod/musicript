@@ -8,10 +8,33 @@ class Timbre(ABC):
     def sample(self, time):
         pass
 
+    def __mul__(self, other):
+        return ScaledTimbre(self, other)
+
+
+class ScaledTimbre(Timbre):
+    def __init__(self, timbre, scale):
+        self.timbre = timbre
+        self.scale = scale
+
+    def sample(self, time):
+        return self.timbre.sample(time) * self.scale
+
+
+class SumTimbre(Timbre):
+    def __init__(self, *args):
+        self.timbres = args
+
+    def sample(self, time):
+        return sum([timbre.sample(time) for timbre in self.timbres])
+
 
 class SineWave(Timbre):
+    def __init__(self, freq=1):
+        self.k = 2 * math.pi * freq
+
     def sample(self, time):
-        return math.sin(2 * math.pi * time)
+        return math.sin(self.k * time)
 
 
 class SquareWave(Timbre):
