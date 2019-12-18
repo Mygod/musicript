@@ -1,6 +1,7 @@
 # this is a transcription of: https://www.youtube.com/watch?v=7FeH_yOLosU
 
 from musicript import Musicript, Instrument, Track, bpm, track_worker
+from musicript.articulations import MultiplicativeArticulation
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SawtoothWave, SquareWave
 from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
@@ -56,7 +57,7 @@ def melody():
     instrument(Instrument(SawtoothWave())); loudness(.02)
     time_scale(bpm(240))
     temperament(EqualTemperament12())
-    articulation(1/16)
+    articulation(MultiplicativeArticulation())
     yield 2; fs4(1); cs5(1)
     a5(1); fs5(1); cs5(1); a4(1)
     fs5(1); fs5(1); fs5(1); fs5(1)

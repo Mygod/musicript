@@ -18,7 +18,7 @@ class Track:
         self.note_time = 0
         self.declick = True
         self.time_scale = 1
-        self.articulation = 0
+        self.articulation = None
 
     def __setup(self):
         def articulation(a: float):
@@ -41,12 +41,11 @@ class Track:
             self.frequency = f
             self.note_time = 0
             if duration is not None:
-                if self.articulation > 0:
-                    yield duration * (1 - self.articulation)
-                    self.frequency = 0
-                    yield duration * self.articulation
-                else:
+                if self.articulation is None:
                     yield duration
+                else:
+                    for r in self.articulation.articulate(frequency, f, duration):
+                        yield r
 
         @track_worker(transform=False)
         def rest(duration):

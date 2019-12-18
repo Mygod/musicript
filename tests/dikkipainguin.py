@@ -1,6 +1,7 @@
 # this is a transcription of: https://www.youtube.com/watch?v=hR2HnsUIvW8
 
 from musicript import Musicript, Instrument, Track, bpm, track_worker
+from musicript.articulations import MultiplicativeArticulation
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SawtoothWave, SquareWave, WhiteNoise
 
@@ -44,7 +45,7 @@ def bass_rif(a):
 
 @track_worker()
 def bass(rep, a4):
-    instrument(Instrument(SquareWave())); articulation(1/16)
+    instrument(Instrument(SquareWave())); articulation(MultiplicativeArticulation())
     temperament(EqualTemperament12(a4))
     for r in range(rep):
         time_scale(bpm(145))
@@ -86,7 +87,7 @@ def countermelody_rifb(a, b, c, d, e):
 
 @track_worker()
 def countermelody(rep, a4):
-    instrument(Instrument(SquareWave())); articulation(1/16)
+    instrument(Instrument(SquareWave())); articulation(MultiplicativeArticulation())
     tp = EqualTemperament12(a4)
     temperament(tp)
     for r in range(rep):
@@ -135,7 +136,7 @@ def melody_rifb2(a, b, c):
 
 @track_worker()
 def melody(rep, a4):
-    instrument(Instrument(SawtoothWave())); articulation(1/16)
+    instrument(Instrument(SawtoothWave())); articulation(MultiplicativeArticulation())
     tp = EqualTemperament12(a4)
     temperament(tp)
     for r in range(rep):
