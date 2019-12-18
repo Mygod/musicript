@@ -3,7 +3,7 @@
 from musicript import Musicript, Instrument, Track, bpm, track_worker
 from musicript.articulations import Articulation
 from musicript.temperaments import EqualTemperament12
-from musicript.timbres import SawtoothWave, SquareWave, WhiteNoise
+from musicript.timbres import SawtoothWave, SquareWave
 
 
 class MarioOverworldArticulation(Articulation):
@@ -34,6 +34,15 @@ def bass_rifa():
 
 
 @track_worker()
+def bass_b():
+    temperament(EqualTemperament12())
+    for i in range(3):
+        ab2(3/2); eb3(3/2); ab3(1)
+        g3(3/2); c3(3/2); g2(1)
+    bass_intro()
+
+
+@track_worker()
 def bass_c():
     temperament(EqualTemperament12())
     for i in range(2):
@@ -44,6 +53,21 @@ def bass_c():
         f4(1); d4(1/2); e4(1/2)
         rest(1/2); c4(1); a3(1/2)
         b3(1/2); g3(3/2)
+
+
+@track_worker()
+def bass_d():
+    temperament(EqualTemperament12())
+    for k in range(2):
+        c3(3/2); fs3(1/2); g3(1); c4(1)
+        f3(1); f3(1); c4(1/2); c4(1/2); f3(1)
+        if k == 0:
+            d3(3/2); f3(1/2); g3(1); b3(1)
+            g3(1); g3(1); c4(1/2); c4(1/2); g3(1)
+        else:
+            g3(1); g3(1)
+            g3(2/3); a3(2/3); b3(2/3)
+            c4(1); g3(1); c3(2)
 
 
 @track_worker()
@@ -64,12 +88,11 @@ def bass(rep):
             bb3(3/2)
             c4(3/2); g3(1/2)
             g3(1); c3(1)
-        for i in range(2):
-            for j in range(3):
-                ab2(3/2); eb3(3/2); ab3(1)
-                g3(3/2); c3(3/2); g2(1)
-            bass_intro()
+        for i in range(2): bass_b()
         bass_c()
+        for i in range(2): bass_d()
+        bass_b()
+        bass_d()
 
 
 @track_worker()
@@ -108,6 +131,16 @@ def countermelody_rifb2():
 
 
 @track_worker()
+def countermelody_b():
+    temperament(EqualTemperament12())
+    countermelody_rifb2()
+    countermelody_rifb1(); g4(1/2)
+    rest(4)
+    countermelody_rifb2()
+    countermelody_intro()
+
+
+@track_worker()
 def countermelody_c():
     temperament(EqualTemperament12())
     for i in range(2):
@@ -121,8 +154,24 @@ def countermelody_c():
 
 
 @track_worker()
+def countermelody_d():
+    temperament(EqualTemperament12())
+    for k in range(2):
+        c5(1/2); a4(1); e4(3/2); e4(1)
+        f4(1/2); c5(1); c5(1/2); f4(2)
+        if k == 0:
+            g4(2/3); f5(2/3); f5(2/3)
+            f5(2/3); e5(2/3); d5(2/3)
+            c5(1/2); a4(1); f4(1/2); e4(2)
+        else:
+            g4(1/2); d5(1); d5(1/2)
+            d5(2/3); c5(2/3); b4(2/3)
+            g4(1/2); e4(1); e4(1/2); c4(2)
+
+
+@track_worker()
 def countermelody(rep):
-    instrument(Instrument(SquareWave())); articulation(MarioOverworldArticulation())
+    instrument(Instrument(SawtoothWave())); articulation(MarioOverworldArticulation())
     time_scale(bpm(200))
     temperament(EqualTemperament12())
     countermelody_intro()
@@ -136,13 +185,11 @@ def countermelody(rep):
             countermelody_rifa2()
             rest(1); ab4(3/2); f4(3/2)
             e4(4)
-        for i in range(2):
-            countermelody_rifb2()
-            countermelody_rifb1(); g4(1/2)
-            rest(4)
-            countermelody_rifb2()
-            countermelody_intro()
+        for i in range(2): countermelody_b()
         countermelody_c()
+        for i in range(2): countermelody_d()
+        countermelody_b()
+        countermelody_d()
 
 
 @track_worker()
@@ -181,6 +228,16 @@ def melody_rifb2():
 
 
 @track_worker()
+def melody_b():
+    temperament(EqualTemperament12())
+    melody_rifb2()
+    melody_rifb1(); e5(1/2)
+    rest(4)
+    melody_rifb2()
+    melody_intro()
+
+
+@track_worker()
 def melody_c():
     temperament(EqualTemperament12())
     for i in range(2):
@@ -191,6 +248,22 @@ def melody_c():
         a5(1); f5(1/2); g5(1/2)
         rest(1/2); e5(1); c5(1/2)
         d5(1/2); b4(3/2)
+
+
+@track_worker()
+def melody_d():
+    temperament(EqualTemperament12())
+    for k in range(2):
+        e5(1/2); c5(1); g4(3/2); gs4(1)
+        a4(1/2); f5(1); f5(1/2); a4(2)
+        if k == 0:
+            b4(2/3); a5(2/3); a5(2/3)
+            a5(2/3); g5(2/3); f5(2/3)
+            e5(1/2); c5(1); a4(1/2); g4(2)
+        else:
+            b4(1/2); f5(1); f5(1/2)
+            f5(2/3); e5(2/3); d5(2/3)
+            c5(1/2); e4(1); e4(1/2); c4(2)
 
 
 @track_worker()
@@ -209,13 +282,11 @@ def melody(rep):
             melody_rifa2()
             rest(1); eb5(3/2); d5(3/2)
             c5(4)
-        for i in range(2):
-            melody_rifb2()
-            melody_rifb1(); e5(1/2)
-            rest(4)
-            melody_rifb2()
-            melody_intro()
+        for i in range(2): melody_b()
         melody_c()
+        for i in range(2): melody_d()
+        melody_b()
+        melody_d()
 
 
 def main():
