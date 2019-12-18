@@ -23,6 +23,16 @@ python tospeaker.py tests.simple
 
 Also check out other music in `tests`!
 
+## How does it work?
+
+`Track` takes a generator object (which is outputted by a function that `yield`s, this is how we enable infinite loops), and manipulate its global environment to add new methods that you can call.
+These methods will in turn enable the inner function to manipulate the environment.
+The function sets up the environment before it yields and suspends itself.
+In between the suspension, Musicript reads out the environment and generates audio samples.
+
+`track_worker` recompiles your method into the one that yields every timeout that is outputted by its subroutines that are also tagged `track_worker` (and copies its global environment into subroutine's global environment).
+It also sets up an isolated global environment every time the function is run, so that `Track` can manipulate each generator object without affecting the rest of the world. 
+
 ## Known issues
 
 * I have not tested `tospeaker.py` because of Linux;
