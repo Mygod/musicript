@@ -1,9 +1,39 @@
-# this is a transcription of: https://www.youtube.com/watch?v=7FeH_yOLosU
+# this is a transcription of: https://www.youtube.com/watch?v=hR2HnsUIvW8
 
 from musicript import Musicript, Instrument, Track, bpm, track_worker
 from musicript.temperaments import EqualTemperament12
-from musicript.timbres import SawtoothWave, SquareWave
-from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
+from musicript.timbres import SawtoothWave, SquareWave, WhiteNoise
+
+
+@track_worker()
+def bop(duration):
+    note(1, 1/8)
+    rest(duration - 1/8)
+
+
+@track_worker()
+def perc(rep):
+    instrument(Instrument(WhiteNoise()))
+    for r in range(rep):
+        time_scale(bpm(145))
+        for i in range(8): bop(1/2); bop(1/4); bop(1/4)
+
+        time_scale(bpm(141.2))
+        bop(1); bop(1/2); bop(1/2)
+        bop(1); bop(1/2); bop(1/4); bop(1/4)
+        for i in range(6): bop(1/2)
+        # 1 + 4 (A) 12 + 1
+        for i in range(1 + 4 + 12 + 1): bop(1/2); bop(1/4); bop(1/4)
+        for i in range(12): bop(1/4)
+        # B
+        for j in range(8): bop(1/2)
+        for j in range(3): bop(1/2); bop(1/4); bop(1/4)
+        for j in range(4): bop(1/4)
+        # 16 (C) 24 + 1
+        for j in range(16 + 24 + 1): bop(1/2)
+        for j in range(14): bop(1/4)
+        # D
+        for i in range(8): bop(1/2); bop(1/4); bop(1/4)
 
 
 @track_worker()
@@ -163,4 +193,5 @@ def main():
     music.tracks.append(Track(melody(rep, a4)))
     music.tracks.append(Track(countermelody(rep, a4)))
     music.tracks.append(Track(bass(rep, a4)))
+    music.tracks.append(Track(perc(rep)))
     return music
