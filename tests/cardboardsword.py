@@ -1,9 +1,9 @@
 # this is a transcription of: https://www.youtube.com/watch?v=7FeH_yOLosU
 
 from musicript import Musicript, Instrument, Track, bpm, track_worker
-# from musicript.postprocessors import Reverb
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SawtoothWave, SquareWave
+from musicript.volumemodifiers import ExponentialDiminishingVolumeModifier
 
 
 @track_worker()
@@ -48,7 +48,7 @@ def countermelody():
     d4(4)
     es4(4)
     fs4(4)
-    rest(16)
+    instrument(Instrument(SquareWave(), volume_modifier=ExponentialDiminishingVolumeModifier(0.99))); yield 16
 
 
 @track_worker()
