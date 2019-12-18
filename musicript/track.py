@@ -48,6 +48,11 @@ class Track:
                 else:
                     yield duration
 
+        @track_worker(transform=False)
+        def rest(duration):
+            self.frequency = 0
+            yield duration
+
         def temperament(t: Temperament):
             # print(inspect.stack()[2].frame)
             t.setup(self.generator.gi_frame.f_globals, inspect.stack()[2].frame.f_globals)

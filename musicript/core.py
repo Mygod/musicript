@@ -9,9 +9,13 @@ from .volumemodifiers import VolumeModifier, ConstantVolumeModifier
 class Musicript:
     def __init__(self):
         self.tracks = []
+        self.postprocessors = []
 
     def update(self, delta):
-        return sum([track.update(delta) for track in self.tracks])
+        output = sum([track.update(delta) for track in self.tracks])
+        for postprocessor in self.postprocessors:
+            output = postprocessor.process(output, delta)
+        return output
 
 
 class Instrument:

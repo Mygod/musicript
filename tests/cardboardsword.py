@@ -1,4 +1,7 @@
+# this is a transcription of: https://www.youtube.com/watch?v=7FeH_yOLosU
+
 from musicript import Musicript, Instrument, Track, bpm, track_worker
+# from musicript.postprocessors import Reverb
 from musicript.temperaments import EqualTemperament12
 from musicript.timbres import SawtoothWave, SquareWave
 
@@ -33,6 +36,7 @@ def bass():
     bass_d()
     bass_cs()
     bass_fsm()
+    rest(16)
 
 
 @track_worker()
@@ -44,6 +48,7 @@ def countermelody():
     d4(4)
     es4(4)
     fs4(4)
+    rest(16)
 
 
 @track_worker()
@@ -57,6 +62,7 @@ def melody():
     fs5(1); fs5(1); fs5(1); fs5(1)
     es5(1); es5(1); es5(1); es5(1)
     fs4(1); fs4(1); fs4(1); fs4(1)
+    yield 16
 
 
 def main():
@@ -64,4 +70,5 @@ def main():
     music.tracks.append(Track(melody()))
     music.tracks.append(Track(countermelody()))
     music.tracks.append(Track(bass()))
+    # music.postprocessors.append(Reverb(.1, .95))
     return music
