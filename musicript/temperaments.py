@@ -4,15 +4,6 @@ from abc import ABC, abstractmethod
 from . import track_worker
 
 
-def make_sound(note, pitch):
-    @track_worker(transform=False)  # does not work with transform yet
-    def sound(*args, **kwargs):
-        # print(pitch)
-        for r in note(pitch, *args, **kwargs):
-            yield r
-    return sound
-
-
 class Temperament(ABC):
     @abstractmethod
     def setup(self, gscope, lscope):
@@ -37,10 +28,20 @@ class Midi(Temperament):
 class EqualTemperament12(Temperament):
     def __init__(self, a4=440):
         self.a4 = a4
+        self.shift = 0
 
     def setup(self, gscope, lscope):
         def midino(i, octave):
             return octave * 12 + [0, 2, 4, 5, 7, 9, 11][i]
+
+        def make_sound(note, pitch):
+            @track_worker(transform=False)  # does not work with transform yet
+            def sound(*args, **kwargs):
+                # print(pitch)
+                for r in note(pitch * math.pow(2, self.shift / 12), *args, **kwargs):
+                    yield r
+            return sound
+
         baseline = midino(5, 4)
         note = gscope['note']
         for octave in range(-9, 10):
