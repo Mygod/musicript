@@ -23,6 +23,12 @@ class SquareWave(Timbre):
 class TriangleWave(Timbre):
     def sample(self, time):
         time -= math.floor(time)
+        return math.fabs(time * 2 - 1) * 2 - 1
+
+
+class SawtoothWave(Timbre):
+    def sample(self, time):
+        time -= math.floor(time)
         return time * 2 - 1
 
 

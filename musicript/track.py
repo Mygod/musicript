@@ -18,8 +18,12 @@ class Track:
         self.note_time = 0
         self.declick = True
         self.time_scale = 1
+        self.articulation = 0
 
     def __setup(self):
+        def articulation(a: float):
+            self.articulation = a
+
         def declick(d: bool):
             self.declick = d
 
@@ -37,7 +41,12 @@ class Track:
             self.frequency = f
             self.note_time = 0
             if duration is not None:
-                yield duration
+                if self.articulation > 0:
+                    yield duration * (1 - self.articulation)
+                    self.frequency = 0
+                    yield duration * self.articulation
+                else:
+                    yield duration
 
         def temperament(t: Temperament):
             # print(inspect.stack()[2].frame)
